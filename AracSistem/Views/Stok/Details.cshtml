@@ -1,0 +1,143 @@
+﻿@model AracSistem.Models.Stok
+@{
+    ViewBag.Title = "StocksDetails";
+    int i = 0;
+}
+@section HeaderCss{
+    <link href="~/Content/css/Home/StocksDetails/StocksDetails.css" rel="stylesheet" />
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+}
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Stocks","Home")">Stoklar</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Stok Ayrıntı</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="@Url.Action("updateStocks","Home")" class="btn btn-sm btn-neutral">Düzenle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <!-- end: Card header -->
+                    <div class="card-header border-0">
+                        <h2 class="mb-0" style="text-align:left;font-weight:bold">Stok Bilgisi</h2>
+                    </div>
+                    <!-- end: Card header -->
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card card-stats">
+                                    <!-- Card body -->
+                                    <div class="card-body detay">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Kategori</h5>
+                                                <span class="h2 font-weight-bold mb-0">@Model.Kategori.Kategori_Ad</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Barkod</h5>
+                                                <span class="h2 font-weight-bold mb-0">@Model.Stok_Barkod</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Stok Ad</h5>
+                                                <span class="h2 font-weight-bold mb-0">@Model.Stok_Ad</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Birim Adı</h5>
+                                                <span class="h2 font-weight-bold mb-0">@Model.Birim.Birim_Ad</span>
+                                            </div>
+                                        </div>
+                                        <div class="row bosluk">
+                                            <div class="col-md-3">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Alış Fiyatı</h5>
+                                                <span class="h2 font-weight-bold mb-0">@Model.Stok_AlisFiyat ₺</span>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Satış Fiyatı</h5>
+                                                <span class="h2 font-weight-bold mb-0">@Model.Stok_SatisFiyat ₺</span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr />
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- end: Card header -->
+                    <div class="card-header border-0">
+                        <h2 class="mb-0" style="text-align:left;font-weight:bold">Stok İşlem</h2>
+                    </div>
+                    <!-- Light table -->
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="sort" data-sort="completion">#</th>
+                                    <th scope="col" class="sort" data-sort="completion">MİKTAR</th>
+                                    <th scope="col" class="sort" data-sort="completion">TARİH</th>
+                                    <th scope="col" class="sort" data-sort="name">İŞLEM TÜRÜ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list ayrinti">
+                                @foreach (var item in Model.Stok_Islem)
+                                {
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">@(i+1)</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        @item.StokIslem_Miktar <span class="name mb-0 text-sm cssBold">Adet</span>
+                                    </td>
+                                    <td class="budget">
+                                        @item.StokIslem_Tarih
+                                    </td>
+                                    <td class="budget">
+                                        @item.IslemTur.IslemTur_Ad
+                                    </td>
+                                   
+                                </tr>
+                                } 
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

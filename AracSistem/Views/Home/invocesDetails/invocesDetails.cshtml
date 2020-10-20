@@ -1,0 +1,408 @@
+﻿
+@{
+    ViewBag.Title = "invocesDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeaderCss{
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+    <link href="~/Content/css/Home/invocesDetails/invocesDetails.css" rel="stylesheet" />
+    <style>
+    </style>
+}
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")" "><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("invoices","Home")">Faturalar</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Fatura Ayrıntı</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="@Url.Action("updateInvoices","Home")" class="btn btn-sm btn-neutral">Güncelle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <h2 class="mb-0" style="text-align:left;font-weight:bold">Mehmet Engin</h2>
+                    </div>
+                    <!--end: Card header -->
+
+                    <div class="nav-wrapper col-md-5" style="margin-left:15px">
+                        <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"><i class="ni ni-cloud-upload-96 mr-2"></i>FATURA</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="ni ni-bell-55 mr-2"></i>ARAÇ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-5" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>MÜŞTERİ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"><i class="ni ni-calendar-grid-58 mr-2"></i>ODEME ŞEKLİ</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-stats">
+                                            <!-- Card body -->
+                                            <div class="card-body detay">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Fatura Tarihi </h5>
+                                                        <span class="h2 font-weight-bold mb-0">453</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Tutar</h5>
+                                                        <span class="h2 font-weight-bold mb-0">15.000  ₺</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">İŞLEM TİPİ</h5>
+                                                        <span class="h2 font-weight-bold mb-0">Mal Alım</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">İŞLEM ADI</h5>
+                                                        <span class="h2 font-weight-bold mb-0">Satış</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Açıklama</h5>
+                                                        <span class="h2 font-weight-bold mb-0">
+                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
+                                                        </span>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-stats">
+                                            <!-- Card body -->
+                                            <div class="card-body detay">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Plaka  </h5>
+                                                        <span class="h2 font-weight-bold mb-0">08 DFH 96</span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">RUHSAT EKLENME TARİHİ</h5>
+                                                        <span class="h2 font-weight-bold mb-0">05.07.2019</span>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">RUHSAT</h5>
+                                                        <span class="h2 font-weight-bold mb-0">A155</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">SDAS5D6SD6AS5D</h5>
+                                                        <span class="h2 font-weight-bold mb-0">
+                                                            SDAS5D6SD6AS5DSDAS5D6SD6AS5D
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-5-tab">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-stats">
+                                            <!-- Card body -->
+                                            <div class="card-body detay">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Ad Ve Soyad  </h5>
+                                                        <span class="h2 font-weight-bold mb-0">08 DFH 96</span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Telefon</h5>
+                                                        <span class="h2 font-weight-bold mb-0">05.07.2019</span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Plaka</h5>
+                                                        <span class="h2 font-weight-bold mb-0">A155</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row bosluk">
+                                                    <div class="col-md-4">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Adres  </h5>
+                                                        <span class="h2 font-weight-bold mb-0">08 DFH 96</span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Cep Telefonu</h5>
+                                                        <span class="h2 font-weight-bold mb-0">05.07.2019</span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Mail</h5>
+                                                        <span class="h2 font-weight-bold mb-0">
+                                                            deneme@gmail.com
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <table class="table table-bordered" style="text-align:left">
+                                        <thead class="thead-light">
+                                            <tr class="short">
+                                                <th>AD SOYAD &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp :</th>
+                                                <td>Mehmet Engin</td>
+                                            </tr>
+                                            <tr class="short">
+                                                <th>TELEFON :</th>
+                                                <td>0537 568 52 52</td>
+                                            </tr>
+                                            <tr class="short">
+                                                <th>PLAKA &nbsp&nbsp :</th>
+                                                <td>821 ASS 54</td>
+                                            </tr>
+                                            <tr class="short">
+                                                <th>ADRES &nbsp&nbsp :</th>
+                                                <td>Merkez/DÜZCE</td>
+                                            </tr>
+                                            <tr class="short">
+                                                <th>CEP TELEFONU &nbsp&nbsp :</th>
+                                                <td>0546 589 89 86</td>
+                                            </tr>
+                                            <tr class="short">
+                                                <th>MAIL &nbsp&nbsp :</th>
+                                                <td>deneme@gmail.com</td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-icons-text-3" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card card-stats">
+                                            <!-- Card body -->
+                                            <div class="card-body detay">
+                                                <div class="row">
+                                                    <div class="">
+                                                        <h5 class="card-title text-uppercase text-muted mb-0">Ödeme Şekli</h5>
+                                                        <span class="h2 font-weight-bold mb-0">
+                                                            Nakit
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+<hr />
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <h2 class="mb-0" style="text-align:left;font-weight:bold">Fatura İşlem</h2>
+                    </div>
+                    <!--end: Card header -->
+                    <!-- Light table -->
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="sort" data-sort="completion">#</th>
+                                    <th scope="col" class="sort" data-sort="completion">ARAÇ KİLOMETRE</th>
+                                    <th scope="col" class="sort" data-sort="completion">AÇIKLAMA</th>
+                                </tr>
+                            </thead>
+                            <tbody class="list ayrinti">
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm">1</span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        164.00 <span class="name mb-0 text-sm cssBold">KM</span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <span>SAEDSADSADASDSADSA</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+

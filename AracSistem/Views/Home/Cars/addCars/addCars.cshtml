@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "addCars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section HeaderCss{
+    <link href="~/Content/css/Home/Cars/addCars/addCars.css" rel="stylesheet" />
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+}
+
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Cars","Home")">Araçlar</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Araç Ekle</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="@Url.Action("Cars","Home")" class="btn btn-sm btn-neutral">Kaydet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-0" style="">Araç Ekle</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Card header -->
+                    <!-- card body -->
+                    <div class="card-body">
+                        <form>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">PLAKA</label>
+                                            <input type="text" id="input-username" class="form-control" placeholder="Plaka giriniz  *">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">ŞASE</label>
+                                            <input type="email" id="input-email" class="form-control" placeholder="Şase bilgisi Giriniz  *">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end: card body -->
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
