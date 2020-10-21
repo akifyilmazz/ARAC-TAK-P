@@ -1,6 +1,7 @@
-﻿
+﻿@model AracSistem.Models.Arac
 @{
     ViewBag.Title = "CarsDetails";
+    int i = 0;
 }
 
 @section HeaderCss{
@@ -15,15 +16,15 @@
                     <div class="col-lg-6 col-7">
                         <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")" "><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("Cars","Home")">Araçlar</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Cars")">Araçlar</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Araç Ayrıntı</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("updateCars","Home")" class="btn btn-sm btn-neutral">Düzenle</a>
+                        <a href="@Url.Action("Edit","Cars")" class="btn btn-sm btn-neutral">Düzenle</a>
                     </div>
                 </div>
             </div>
@@ -67,13 +68,13 @@
                                                     <div class="col-md-6">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Plaka</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            06 DND 95
+                                                            @Model.Arac_Plaka
                                                         </span>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Şase</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            sadsad5sad4sa5dsa
+                                                            @Model.Arac_Sase
                                                         </span>
                                                     </div>
                                                 </div>
@@ -89,13 +90,13 @@
                                                     <div class="col-md-6">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Ruhsat Ekleme Tarihi</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            05.07.2019
+                                                            @Model.Ruhsat.Ruhsat_EklenmeTarih
                                                         </span>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Ruhsat No</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            A155
+                                                            @Model.Ruhsat.Ruhsat_No
                                                         </span>
                                                     </div>
                                                 </div>
@@ -112,19 +113,19 @@
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Adı Ve Soyadı</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            Ahmet DENİZ
+                                                            @Model.Ruhsat.Musteri.Musteri_AdSoyad
                                                         </span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Telefon</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            455 555 55 55
+                                                            @Model.Ruhsat.Musteri.Musteri_Telefon
                                                         </span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Plaka</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            06 DNN 59
+                                                            @Model.Ruhsat.Musteri.Musteri_Plaka
                                                         </span>
                                                     </div>
                                                 </div>
@@ -132,21 +133,21 @@
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Cep Telefonu</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            0547 568 10 20
+                                                            @Model.Ruhsat.Musteri.Musteri_CepTelefon
                                                         </span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Mail</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            deneme@gmail.com
+                                                            @Model.Ruhsat.Musteri.Musteri_Mail
                                                         </span>
-                                                    </div> 
+                                                    </div>
                                                 </div>
                                                 <div class=" row">
                                                     <div class="col-md-12">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Adres</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has    düzce/merkez
+                                                            @Model.Ruhsat.Musteri.Musteri_Adres
                                                         </span>
                                                     </div>
                                                 </div>
@@ -185,119 +186,27 @@
                                 </tr>
                             </thead>
                             <tbody class="list ayrinti">
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
+                               
+                                @foreach (var item in Model.Arac_Islem)
+                                {
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
 
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">1</span>
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm">@(i+1)</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        150.000<span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
-                                    </td>
+                                        </th>
+                                        <td class="budget">
+                                           @item.AracIslem_Km<span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
+                                        </td>
 
-                                    <td class="budget">
-                                        <span>   Lorem Ipsum is simply dummy text of the printing </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
-
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">1</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        150.000 <span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>   Lorem Ipsum is simply dummy text of the printing </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
-
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">1</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        150.000<span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>   Lorem Ipsum is simply dummy text of the printing </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
-
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">1</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        150.000<span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>   Lorem Ipsum is simply dummy text of the printing </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
-
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">1</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        150.000<span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>   Lorem Ipsum is simply dummy text of the printing </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
-
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">1</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        150.000<span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>   Lorem Ipsum is simply dummy text of the printing </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
-
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">1</span>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        150.000<span class="name mb-0 text-sm cssBold">&nbsp&nbsp₺</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>   Lorem Ipsum is simply dummy text of the printing </span>
-                                    </td>
-                                </tr>
+                                        <td class="budget">
+                                            <span>@item.AracIslem_Aciklama</span>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

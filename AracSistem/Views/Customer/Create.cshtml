@@ -1,11 +1,11 @@
 ﻿
 @{
-    ViewBag.Title = "updateStocks";
+    ViewBag.Title = "addCustomer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section HeaderCss{
-    <link href="~/Content/css/Home/Stocks/updateStocks/updateStocks.css" rel="stylesheet" />
     <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+    <link href="~/Content/css/Home/Customers/addCustomer/addCustomer.css" rel="stylesheet" />
 }
 
 <section>
@@ -18,21 +18,19 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("invoices","Home")">Stoklar</a></li>
-                                <li class="breadcrumb-item "><a href="@Url.Action("StocksDetails","Home")"> Stok Detay</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Stok Düzenle</li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Customer")">Müşteriler</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Müşteri Ekle</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("StocksDetails","Home")" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="customerEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 
 <section>
     <div class="container-fluid mt--6">
@@ -43,7 +41,7 @@
                     <div class="card-header border-0">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2 class="mb-0" style="">Stok Düzenle</h2>
+                                <h2 class="mb-0" style="">Müşteri Ekle</h2>
                             </div>
                         </div>
                     </div>
@@ -55,42 +53,34 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-username">BARKOD</label>
-                                            <input type="text" id="input-username" class="form-control" placeholder="Barkod girinz  *" value="15625572">
+                                            <label class="form-control-label" for="input-username">Ad ve Soyad</label>
+                                            <input type="text" id="input-adSoyad" class="form-control" placeholder="Ad Ve Soyad  *">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-email">STOK AD</label>
-                                            <input type="email" id="input-email" class="form-control" placeholder="Stok giriniz  *" value="Far">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-first-name">ALIŞ FIYAT	</label>
-                                            <input type="text" id="input-first-name" class="form-control" placeholder="Alış fiyatı giriniz  *" value="56.000 ₺	">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-last-name">SATIŞ FIYAT	</label>
-                                            <input type="text" id="input-last-name" class="form-control" placeholder="Satış fiyatı giriniz  *" value="62.000 ₺	">
+                                            <label class="form-control-label" for="input-email">Telefon</label>
+                                            <input type="email" id="input-telefon" class="form-control" placeholder="Telefon Numarası Giriniz  *">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-first-name">KDV ORAN</label>
-                                            <input type="text" id="input-first-name" class="form-control" placeholder="Kadv oranı giriniz  *" value="18 %	">
+                                            <label class="form-control-label" for="input-first-name">Plaka</label>
+                                            <input type="text" id="input-plaka" class="form-control" placeholder="Plaka Giriniz  *">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-last-name">OTV ORAN</label>
-                                            <input type="text" id="input-last-name" class="form-control" placeholder="Otv oranı giriniz  *" value="6 %	    ">
+                                            <label class="form-control-label" for="input-last-name">Mail</label>
+                                            <input type="text" id="input-mail" class="form-control" placeholder="Mail Giriniz  *">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Adres</label>
+                                            <textarea rows="4" class="form-control" id="input-adres" placeholder="Adres Bilgileri Giriniz ..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -108,5 +98,34 @@
     </div>
 </section>
 
+@section CreateCustomer{
+    <script>
+        function customerEkle() {
+            data = {
+                Musteri_AdSoyad: $('#input-adSoyad').val(),
+                Musteri_Telefon: $('#input-telefon').val(),
+                Musteri_Plaka: $('#input-plaka').val(),
+                Musteri_Mail: $('#input-mail').val(),
+                Musteri_Adres: $('#input-adres').val(),
+            }
+            $.ajax({
+                url: '/Customer/Create/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Musteri_Id > 0) {
+                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                        //buraya yönlendirme koyulacak
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
 
-
+    </script>
+}

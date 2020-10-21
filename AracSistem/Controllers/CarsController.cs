@@ -10,45 +10,44 @@ using AracSistem.Models;
 
 namespace AracSistem.Controllers
 {
-    public class StokController : Controller
+    public class CarsController : Controller
     {
         private DbModel db = new DbModel();
 
-        // GET: Stok
+        // GET: Cars
         public ActionResult Index()
         {
-            var stok = db.Stok.ToList();
-            return View(stok);
+            var arac = db.Arac.ToList();
+            return View(arac);
         }
 
-        // GET: Stok/Details/5
+        // GET: Cars/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stok stok = db.Stok.Find(id);
-            if (stok == null)
+            Arac arac = db.Arac.Find(id);
+            if (arac == null)
             {
                 return HttpNotFound();
             }
-            return View(stok);
+            return View(arac);
         }
 
         public ActionResult Create()
         {
-        
             return View();
         }
-
         [HttpPost]
-        public JsonResult Create(Stok stok)
+        public JsonResult Create(Arac arac)
         {
-            db.Stok.Add(stok);
+            db.Arac.Add(arac);
             db.SaveChanges();
-            return Json(stok);
+            return Json(arac);
         }
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

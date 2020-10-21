@@ -34,27 +34,33 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="@Url.Action("invoices","Home")">
+                                <a class="nav-link " href="@Url.Action("Index","Invocies")">
                                     <i class="ni ni-folder-17"></i>
                                     <span class="nav-link-text">Faturalar</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="@Url.Action("Customers","Home")">
+                                <a class="nav-link " href="@Url.Action("Index","Customer")">
                                     <i class="ni ni-single-02"></i>
                                     <span class="nav-link-text">Müşteriler</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="@Url.Action("Stocks","Home")">
+                                <a class="nav-link " href="@Url.Action("Index","Stok")">
                                     <i class="ni ni-archive-2"></i>
                                     <span class="nav-link-text">Stoklar</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="@Url.Action("Cars","Home")">
+                                <a class="nav-link " href="@Url.Action("Index","Cars")">
                                     <i class="ni ni-bus-front-12"></i>
                                     <span class="nav-link-text">Araçlar</span>
+                                </a>
+                            </li>  
+                            <li class="nav-item">
+                                <a class="nav-link " href="@Url.Action("Index","Birim")">
+                                    <i class="ni ni-vector"></i>
+                                    <span class="nav-link-text">Birimler</span>
                                 </a>
                             </li>
                         </ul>
@@ -93,7 +99,7 @@
                             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
-                                        <img src="~/Content/img/theme/team-4.jpg">
+                                        <img src="~/Content/img/theme/team-1.jpg">
                                     </span>
                                     <div class="media-body  ml-2  d-none d-lg-block">
                                         <span class="mb-0 text-sm  font-weight-bold">Behlül</span>
@@ -143,5 +149,9 @@
     @RenderSection("scripts", required: false)
     @RenderSection("FooterJs", false)
     @RenderSection("CreateStok", required: false)
+    @RenderSection("CreateArac", required: false)
+    @RenderSection("CreateCustomer", required: false)
+    @RenderSection("CreateFatura", required: false)
+    @RenderSection("CreateBirim", required: false)
 </body>
 </html>

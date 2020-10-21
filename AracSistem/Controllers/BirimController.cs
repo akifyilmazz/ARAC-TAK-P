@@ -10,45 +10,46 @@ using AracSistem.Models;
 
 namespace AracSistem.Controllers
 {
-    public class StokController : Controller
+    public class BirimController : Controller
     {
         private DbModel db = new DbModel();
 
-        // GET: Stok
+        // GET: Birim
         public ActionResult Index()
         {
-            var stok = db.Stok.ToList();
-            return View(stok);
+            var birim = db.Birim.ToList();
+            return View(birim);
         }
 
-        // GET: Stok/Details/5
+        // GET: Birim/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stok stok = db.Stok.Find(id);
-            if (stok == null)
+            Birim birim = db.Birim.Find(id);
+            if (birim == null)
             {
                 return HttpNotFound();
             }
-            return View(stok);
+            return View(birim);
         }
 
         public ActionResult Create()
         {
-        
             return View();
         }
 
         [HttpPost]
-        public JsonResult Create(Stok stok)
+        public JsonResult Create(Birim birim)
         {
-            db.Stok.Add(stok);
-            db.SaveChanges();
-            return Json(stok);
+                db.Birim.Add(birim);
+                db.SaveChanges();
+
+            return Json(birim);
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

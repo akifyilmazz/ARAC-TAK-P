@@ -19,13 +19,13 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("invoices","Home")">Faturalar</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Invocies")">Faturalar</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Fatura Ekle</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("invoices","Home")" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="FaturaEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -55,21 +55,27 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">Fatura Tarihi</label>
-                                            <input class="form-control" type="datetime-local" value="" id="example-datetime-local-input">
+                                            <input class="form-control" type="datetime-local" value="" id="input-tarih">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Fatura Tutarı</label>
-                                            <input type="email" id="input-email" class="form-control" placeholder="Fatura tutarı girinz  *" value="">
+                                            <input type="email" id="input-tutar" class="form-control" placeholder="Fatura tutarı girinz  *" value="">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Barkod</label>
+                                            <input  type="text" class="form-control" placeholder="Barkod ..." id="input-barkod">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Açıklama</label>
-                                            <textarea rows="4" class="form-control" placeholder="Adres Bilgileri Giriniz ..."></textarea>
+                                            <input type="text" class="form-control" placeholder="Adres Bilgileri Giriniz ..." id="input-aciklama">
                                         </div>
                                     </div>
                                 </div>
@@ -86,3 +92,37 @@
 
     </div>
 </section>
+
+@section CreateFatura{
+    <script>
+        function FaturaEkle() {
+            data = {
+                IslemTur_Id: 2,
+                OdemeSekli_Id: 1,
+                AracIslem_Id: 1,
+                Fatura_Tarih: $('#input-tarih').val(),
+                Fatura_Tutar: $('#input-tutar').val(),
+                Stok_Barkod: $('#input-barkod').val(),
+                Fatura_Aciklama: $('#input-aciklama').val(),
+            }
+            $.ajax({
+                url: '/Invocies/Create/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Fatura_Id > 0) {
+                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                        //buraya yönlendirme koyulacak
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+
+    </script>
+}

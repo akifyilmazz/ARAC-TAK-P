@@ -18,13 +18,13 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("Cars","Home")">Araçlar</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Cars")">Araçlar</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Araç Ekle</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("Cars","Home")" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="aracEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -54,13 +54,13 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">PLAKA</label>
-                                            <input type="text" id="input-username" class="form-control" placeholder="Plaka giriniz  *">
+                                            <input type="text" id="input-plaka" class="form-control" placeholder="Plaka giriniz  *">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">ŞASE</label>
-                                            <input type="email" id="input-email" class="form-control" placeholder="Şase bilgisi Giriniz  *">
+                                            <input type="email" id="input-sase" class="form-control" placeholder="Şase bilgisi Giriniz  *">
                                         </div>
                                     </div>
                                 </div>
@@ -74,6 +74,36 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
+
+
+@section CreateArac{
+    <script>
+        function aracEkle() {
+            data = {
+                Arac_Plaka: $('#input-plaka').val(),
+                Arac_Sase: $('#input-sase').val(),
+                Ruhsat_Id: 2,
+            }
+            $.ajax({
+                url: '/Cars/Create/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Arac_Id > 0) {
+                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                        //buraya yönlendirme koyulacak
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+
+    </script>
+}

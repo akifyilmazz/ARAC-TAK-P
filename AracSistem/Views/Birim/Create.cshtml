@@ -1,11 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "updateInvoices";
+    ViewBag.Title = "addCars";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @section HeaderCss{
-    <link href="~/Content/css/Home/invoices/updateInvoices/updateInvoices.css" rel="stylesheet" />
+    <link href="~/Content/css/Home/Cars/addCars/addCars.css" rel="stylesheet" />
     <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
 }
 
@@ -19,14 +18,13 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("invoices","Home")">Faturalar</a></li>
-                                <li class="breadcrumb-item "><a href="@Url.Action("invocesDetails","Home")"> Fatura Detay</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Fatura Düzenle</li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Birim")">Birim</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Birim Ekle</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("invocesDetails","Home")" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="birimEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +41,7 @@
                     <div class="card-header border-0">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2 class="mb-0" style="">Fatura Düzenle</h2>
+                                <h2 class="mb-0" style="">Birim Ekle</h2>
                             </div>
                         </div>
                     </div>
@@ -53,24 +51,10 @@
                         <form>
                             <div class="pl-lg-4">
                                 <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-username">Fatura Tarihi</label>
-                                            <input class="form-control" type="datetime-local" value="2018-11-23T10:30:00" id="example-datetime-local-input">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label class="form-control-label" for="input-email">Fatura Tutarı</label>
-                                            <input type="email" id="input-email" class="form-control" placeholder="Fatura tutarı girinz  *" value="2500 ₺">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-control-label">Açıklama</label>
-                                            <textarea rows="4" class="form-control" placeholder="Adres Bilgileri Giriniz ...">Lorem Ipsum is simply dummy text of the printing</textarea>
+                                            <label class="form-control-label" for="input-username">Birim Ad</label>
+                                            <input type="text" id="input-birim" class="form-control" placeholder="Birim giriniz  *">
                                         </div>
                                     </div>
                                 </div>
@@ -84,8 +68,34 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
 
+@section CreateBirim{
+    <script>
+        function birimEkle() {
+            data = {
+                Birim_Ad: $('#input-birim').val(),
+            }
+            $.ajax({
+                url: '/Birim/Create/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Birim_Id > 0) {
+                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                        //buraya yönlendirme koyulacak
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,315 @@
+USE [Otomasyon]
+GO
+
+/****** Object:  Table [dbo].[Arac]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Arac](
+	[Arac_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Arac_Plaka] [nchar](10) NOT NULL,
+	[Arac_Sase] [varchar](100) NULL,
+	[Ruhsat_Id] [int] NOT NULL,
+ CONSTRAINT [PK_Arac] PRIMARY KEY CLUSTERED 
+(
+	[Arac_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Arac_Islem]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Arac_Islem](
+	[AracIslem_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Arac_Id] [int] NOT NULL,
+	[AracIslem_Km] [int] NOT NULL,
+	[AracIslem_Aciklama] [text] NULL,
+ CONSTRAINT [PK_Arac_Islem] PRIMARY KEY CLUSTERED 
+(
+	[AracIslem_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Birim]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Birim](
+	[Birim_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Birim_Ad] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_Birim] PRIMARY KEY CLUSTERED 
+(
+	[Birim_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Fatura]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Fatura](
+	[Fatura_Id] [int] IDENTITY(1,1) NOT NULL,
+	[IslemTur_Id] [int] NOT NULL,
+	[OdemeSekli_Id] [int] NOT NULL,
+	[AracIslem_Id] [int] NOT NULL,
+	[Fatura_Tarih] [datetime] NOT NULL,
+	[Fatura_Tutar] [money] NOT NULL,
+	[Fatura_Aciklama] [text] NULL,
+ CONSTRAINT [PK_Fatura] PRIMARY KEY CLUSTERED 
+(
+	[Fatura_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[IslemTur]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[IslemTur](
+	[IslemTur_Id] [int] IDENTITY(1,1) NOT NULL,
+	[IslemTur_Tip] [bit] NOT NULL,
+	[IslemTur_Ad] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_IslemTur] PRIMARY KEY CLUSTERED 
+(
+	[IslemTur_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Kategori]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Kategori](
+	[Kategori_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Kategori_Ad] [varchar](200) NOT NULL,
+ CONSTRAINT [PK_Kategori] PRIMARY KEY CLUSTERED 
+(
+	[Kategori_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Musteri]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Musteri](
+	[Musteri_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Musteri_AdSoyad] [varchar](100) NULL,
+	[Musteri_Telefon] [char](10) NULL,
+	[Musteri_Plaka] [char](10) NULL,
+	[Musteri_Adres] [varchar](250) NULL,
+	[Musteri_CepTelefon] [char](10) NULL,
+	[Musteri_Mail] [varchar](100) NULL,
+ CONSTRAINT [PK_Musteri] PRIMARY KEY CLUSTERED 
+(
+	[Musteri_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Musteri_Islem]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Musteri_Islem](
+	[MusteriIslem_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Musteri_Id] [int] NOT NULL,
+	[MusteriIslem_Tutar] [int] NULL,
+	[MusteriIslem_Kilometre] [int] NULL,
+	[MusteriIslem_Tarih] [datetime] NULL,
+ CONSTRAINT [PK__Musteril__3213E83FDE4506C6] PRIMARY KEY CLUSTERED 
+(
+	[MusteriIslem_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[OdemeSekli]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[OdemeSekli](
+	[OdemeSekli_Id] [int] IDENTITY(1,1) NOT NULL,
+	[OdemeSekli_Ad] [varchar](200) NOT NULL,
+ CONSTRAINT [PK_OdemeSekli] PRIMARY KEY CLUSTERED 
+(
+	[OdemeSekli_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Ruhsat]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Ruhsat](
+	[Ruhsat_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Musteri_Id] [int] NOT NULL,
+	[Ruhsat_EklenmeTarih] [datetime] NOT NULL,
+	[Ruhsat_No] [varchar](100) NOT NULL,
+ CONSTRAINT [PK_Ruhsat_1] PRIMARY KEY CLUSTERED 
+(
+	[Ruhsat_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Stok]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Stok](
+	[Stok_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Kategori_Id] [int] NOT NULL,
+	[Birim_Id] [int] NOT NULL,
+	[Stok_Barkod] [varchar](75) NOT NULL,
+	[Stok_Ad] [varchar](100) NOT NULL,
+	[Stok_AlisFiyat] [money] NOT NULL,
+	[Stok_SatisFiyat] [money] NOT NULL,
+	[Stok_KdvOran] [int] NULL,
+	[Stok_OtvOran] [int] NULL,
+ CONSTRAINT [PK_Stok] PRIMARY KEY CLUSTERED 
+(
+	[Stok_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[Stok_Islem]    Script Date: 21.10.2020 02:57:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Stok_Islem](
+	[StokIslem_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Stok_Id] [int] NOT NULL,
+	[IslemTur_Id] [int] NULL,
+	[StokIslem_Miktar] [float] NOT NULL,
+	[StokIslem_Tarih] [datetime] NULL,
+ CONSTRAINT [PK_Stok_Islem] PRIMARY KEY CLUSTERED 
+(
+	[StokIslem_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Arac]  WITH CHECK ADD  CONSTRAINT [FK_Arac_Ruhsat] FOREIGN KEY([Ruhsat_Id])
+REFERENCES [dbo].[Ruhsat] ([Ruhsat_Id])
+GO
+
+ALTER TABLE [dbo].[Arac] CHECK CONSTRAINT [FK_Arac_Ruhsat]
+GO
+
+ALTER TABLE [dbo].[Arac_Islem]  WITH CHECK ADD  CONSTRAINT [FK_Arac_Islem_Arac] FOREIGN KEY([Arac_Id])
+REFERENCES [dbo].[Arac] ([Arac_Id])
+GO
+
+ALTER TABLE [dbo].[Arac_Islem] CHECK CONSTRAINT [FK_Arac_Islem_Arac]
+GO
+
+ALTER TABLE [dbo].[Fatura]  WITH CHECK ADD  CONSTRAINT [FK_Fatura_Arac_Islem] FOREIGN KEY([AracIslem_Id])
+REFERENCES [dbo].[Arac_Islem] ([AracIslem_Id])
+GO
+
+ALTER TABLE [dbo].[Fatura] CHECK CONSTRAINT [FK_Fatura_Arac_Islem]
+GO
+
+ALTER TABLE [dbo].[Fatura]  WITH CHECK ADD  CONSTRAINT [FK_Fatura_IslemTur] FOREIGN KEY([IslemTur_Id])
+REFERENCES [dbo].[IslemTur] ([IslemTur_Id])
+GO
+
+ALTER TABLE [dbo].[Fatura] CHECK CONSTRAINT [FK_Fatura_IslemTur]
+GO
+
+ALTER TABLE [dbo].[Fatura]  WITH CHECK ADD  CONSTRAINT [FK_Fatura_OdemeSekli] FOREIGN KEY([OdemeSekli_Id])
+REFERENCES [dbo].[OdemeSekli] ([OdemeSekli_Id])
+GO
+
+ALTER TABLE [dbo].[Fatura] CHECK CONSTRAINT [FK_Fatura_OdemeSekli]
+GO
+
+ALTER TABLE [dbo].[Musteri_Islem]  WITH CHECK ADD  CONSTRAINT [FK_Musteri_Islem_Musteri] FOREIGN KEY([Musteri_Id])
+REFERENCES [dbo].[Musteri] ([Musteri_Id])
+GO
+
+ALTER TABLE [dbo].[Musteri_Islem] CHECK CONSTRAINT [FK_Musteri_Islem_Musteri]
+GO
+
+ALTER TABLE [dbo].[Ruhsat]  WITH CHECK ADD  CONSTRAINT [FK_Ruhsat_Musteri] FOREIGN KEY([Musteri_Id])
+REFERENCES [dbo].[Musteri] ([Musteri_Id])
+GO
+
+ALTER TABLE [dbo].[Ruhsat] CHECK CONSTRAINT [FK_Ruhsat_Musteri]
+GO
+
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_Stok_Birim] FOREIGN KEY([Birim_Id])
+REFERENCES [dbo].[Birim] ([Birim_Id])
+GO
+
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_Stok_Birim]
+GO
+
+ALTER TABLE [dbo].[Stok]  WITH CHECK ADD  CONSTRAINT [FK_Stok_Kategori] FOREIGN KEY([Kategori_Id])
+REFERENCES [dbo].[Kategori] ([Kategori_Id])
+GO
+
+ALTER TABLE [dbo].[Stok] CHECK CONSTRAINT [FK_Stok_Kategori]
+GO
+
+ALTER TABLE [dbo].[Stok_Islem]  WITH CHECK ADD  CONSTRAINT [FK_Stok_Islem_IslemTur] FOREIGN KEY([IslemTur_Id])
+REFERENCES [dbo].[IslemTur] ([IslemTur_Id])
+GO
+
+ALTER TABLE [dbo].[Stok_Islem] CHECK CONSTRAINT [FK_Stok_Islem_IslemTur]
+GO
+
+ALTER TABLE [dbo].[Stok_Islem]  WITH CHECK ADD  CONSTRAINT [FK_Stok_Islem_Stok] FOREIGN KEY([Stok_Id])
+REFERENCES [dbo].[Stok] ([Stok_Id])
+GO
+
+ALTER TABLE [dbo].[Stok_Islem] CHECK CONSTRAINT [FK_Stok_Islem_Stok]
+GO
+
+

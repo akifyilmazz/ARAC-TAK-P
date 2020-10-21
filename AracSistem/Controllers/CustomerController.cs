@@ -10,45 +10,45 @@ using AracSistem.Models;
 
 namespace AracSistem.Controllers
 {
-    public class StokController : Controller
+    public class CustomerController : Controller
     {
         private DbModel db = new DbModel();
 
-        // GET: Stok
+        // GET: Customer
         public ActionResult Index()
         {
-            var stok = db.Stok.ToList();
-            return View(stok);
+            var Customer = db.Musteri.ToList();
+            return View(Customer);
         }
 
-        // GET: Stok/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stok stok = db.Stok.Find(id);
-            if (stok == null)
+            Musteri musteri = db.Musteri.Find(id);
+            if (musteri == null)
             {
                 return HttpNotFound();
             }
-            return View(stok);
+            return View(musteri);
         }
 
         public ActionResult Create()
         {
-        
             return View();
         }
 
         [HttpPost]
-        public JsonResult Create(Stok stok)
+        public JsonResult Create(Musteri musteri)
         {
-            db.Stok.Add(stok);
+            db.Musteri.Add(musteri);
             db.SaveChanges();
-            return Json(stok);
+            return Json(musteri);
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

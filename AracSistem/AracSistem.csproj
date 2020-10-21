@@ -156,6 +156,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BirimController.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\InvociesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\StokController.cs" />
@@ -2733,6 +2737,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="NOTES.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -3253,30 +3258,35 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login\Login.cshtml" />
-    <Content Include="Views\Home\invoices\invoices.cshtml" />
-    <Content Include="Views\Home\Customers\Customers.cshtml" />
-    <Content Include="Views\Home\Cars\Cars.cshtml" />
     <Content Include="Views\Account\CreatAccount.cshtml" />
-    <Content Include="Views\Home\CarsDetails\CarsDetails.cshtml" />
-    <Content Include="Views\Home\CustomerDetails\CustomerDetails.cshtml" />
-    <Content Include="Views\Home\invocesDetails\invocesDetails.cshtml" />
-    <Content Include="Views\Home\Customers\addCustomer\addCustomer.cshtml" />
-    <Content Include="Views\Home\Customers\updateCustomer\updateCustomer.cshtml" />
-    <Content Include="Views\Home\Stocks\addStocks\addStocks.cshtml" />
-    <Content Include="Views\Home\Stocks\updateStocks\updateStocks.cshtml" />
-    <Content Include="Views\Home\Cars\addCars\addCars.cshtml" />
-    <Content Include="Views\Home\Cars\updateCars\updateCars.cshtml" />
-    <Content Include="Views\Home\invoices\addInvoices\addInvoices.cshtml" />
-    <Content Include="Views\Home\invoices\updateInvoices\updateInvoices.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Stok\Create.cshtml" />
     <Content Include="Views\Stok\Details.cshtml" />
     <Content Include="Views\Stok\Edit.cshtml" />
     <Content Include="Views\Stok\Index.cshtml" />
+    <Content Include="Views\Cars\Create.cshtml" />
+    <Content Include="Views\Cars\Delete.cshtml" />
+    <Content Include="Views\Cars\Details.cshtml" />
+    <Content Include="Views\Cars\Edit.cshtml" />
+    <Content Include="Views\Cars\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\Delete.cshtml" />
+    <Content Include="Views\Customer\Details.cshtml" />
+    <Content Include="Views\Customer\Edit.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Invocies\Create.cshtml" />
+    <Content Include="Views\Invocies\Delete.cshtml" />
+    <Content Include="Views\Invocies\Details.cshtml" />
+    <Content Include="Views\Invocies\Edit.cshtml" />
+    <Content Include="Views\Invocies\Index.cshtml" />
+    <Content Include="Views\Birim\Create.cshtml" />
+    <Content Include="Views\Birim\Delete.cshtml" />
+    <Content Include="Views\Birim\Details.cshtml" />
+    <Content Include="Views\Birim\Edit.cshtml" />
+    <Content Include="Views\Birim\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\StocksDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
