@@ -3281,7 +3281,6 @@
     <Content Include="Views\Invocies\Index.cshtml" />
     <Content Include="Views\Birim\Create.cshtml" />
     <Content Include="Views\Birim\Delete.cshtml" />
-    <Content Include="Views\Birim\Details.cshtml" />
     <Content Include="Views\Birim\Edit.cshtml" />
     <Content Include="Views\Birim\Index.cshtml" />
   </ItemGroup>

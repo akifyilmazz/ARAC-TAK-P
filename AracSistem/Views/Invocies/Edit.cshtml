@@ -1,7 +1,6 @@
-﻿
+﻿@model AracSistem.Models.Fatura
 @{
     ViewBag.Title = "updateInvoices";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section HeaderCss{
@@ -26,7 +25,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("invocesDetails","Home")" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="InvociesEdit()" class="btn btn-sm btn-neutral">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -56,13 +55,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">Fatura Tarihi</label>
-                                            <input class="form-control" type="datetime-local" value="2018-11-23T10:30:00" id="example-datetime-local-input">
+                                            <input class="form-control" type="datetime" value="@Model.Fatura_Tarih" id="input-faturaTarih">
+                                            <input style="display:none" class="form-control" id="input-faturaId" value="@Model.Fatura_Id">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-email">Fatura Tutarı</label>
-                                            <input type="email" id="input-email" class="form-control" placeholder="Fatura tutarı girinz  *" value="2500 ₺">
+                                            <label class="form-control-label">Fatura Tutarı</label>
+                                            <input id="input-faturaTutar" class="form-control" placeholder="Fatura tutarı girinz  *" value="@Model.Fatura_Tutar">
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label">Açıklama</label>
-                                            <textarea rows="4" class="form-control" placeholder="Adres Bilgileri Giriniz ...">Lorem Ipsum is simply dummy text of the printing</textarea>
+                                            <textarea rows="4" class="form-control" placeholder="Adres Bilgileri Giriniz ..." id="input-aciklama">@Model.Fatura_Aciklama</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -89,3 +89,35 @@
 </section>
 
 
+@section CreateStok{
+    <script>
+        function InvociesEdit() {
+            data = {
+                Fatura_Id: $('#input-faturaId').val(),
+                IslemTur_Id: 2,
+                OdemeSekli_Id: 1,
+                AracIslem_Id: 1,
+                Fatura_Tarih: $('#input-faturaTarih').val(),
+                Fatura_Tutar: $('#input-faturaTutar').val(),
+                Fatura_Aciklama: $('#input-aciklama').val(),
+            }
+            $.ajax({
+                url: '/Invocies/Edit/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Fatura_Id > 0) {
+                        toastr.success('Başarıyla Güncellendi! Yönlendiriliyorsunuz');
+                         window.location.href = '@Url.Action("Index","Invocies")';
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+    </script>
+}

@@ -49,6 +49,29 @@ namespace AracSistem.Controllers
             db.SaveChanges();
             return Json(stok);
         }
+        [HttpGet]
+        public ActionResult Edit(int? Stok_Id)
+        {
+            var stok = db.Stok.Find(Stok_Id);
+
+            return View("Edit", stok);
+        }
+        [HttpPost]
+        public JsonResult Edit(Stok s)
+        {
+            var stok = db.Stok.Find(s.Stok_Id);
+            stok.Kategori_Id = s.Kategori_Id;
+            stok.Birim_Id = s.Birim_Id;
+            stok.Stok_Barkod = s.Stok_Barkod;
+            stok.Stok_Ad = s.Stok_Ad;
+            stok.Stok_AlisFiyat = s.Stok_AlisFiyat;
+            stok.Stok_SatisFiyat = s.Stok_SatisFiyat;
+            stok.Stok_KdvOran = s.Stok_KdvOran;
+            stok.Stok_OtvOran = s.Stok_OtvOran;
+            db.SaveChanges();
+            return Json(s);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

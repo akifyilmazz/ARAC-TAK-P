@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Birim";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int i = 0;
 }
 @section HeaderCss{
     <link href="~/Content/css/Home/Cars/Cars.css" rel="stylesheet" />
@@ -84,7 +83,7 @@
                                             @item.Birim_Ad
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="@Url.Action("Details", "Birim", new { id = item.Birim_Id })" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="@Url.Action("Edit", "Birim", new { Birim_Id= item.Birim_Id })" >
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                         </td>

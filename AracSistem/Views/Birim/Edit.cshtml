@@ -1,38 +1,103 @@
 ﻿@model AracSistem.Models.Birim
-
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section HeaderCss{
+    <link href="~/Content/css/Home/Cars/addCars/addCars.css" rel="stylesheet" />
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Birim</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Birim_Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Birim_Ad, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Birim_Ad, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Birim_Ad, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Birim")">Birim</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Edit","Birim")">Birim Düzenle</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Birim Düzenle</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="javascript:;" onclick="editBirim()" class="btn btn-sm btn-neutral">Kaydet</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
+</section>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-0" style="">Birim Düzenle</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Card header -->
+                    <!-- card body -->
+                    <div class="card-body">
+                        <form>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Birim Ad</label>
+                                            <input type="text" id="input-birim" class="form-control" placeholder="Birim giriniz  *" value="@Model.Birim_Ad">
+                                            <input style="display:none" type="text" id="input-birimId" class="form-control" value="@Model.Birim_Id" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end: card body -->
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section CreateBirim{
+    <script>
+        function editBirim() {
+            data = {
+                Birim_Id: $('#input-birimId').val(),
+                Birim_Ad: $('#input-birim').val(),
+            }
+            $.ajax({
+                url: '/Birim/Edit/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Birim_Id > 0) {
+                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                         window.location.href = '@Url.Action("Index","Birim")';
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+
+    </script>
+}

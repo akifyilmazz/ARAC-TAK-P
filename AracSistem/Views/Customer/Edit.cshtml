@@ -1,6 +1,6 @@
-﻿@{
-    ViewBag.Title = "updateCustomer";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model AracSistem.Models.Musteri
+@{
+    ViewBag.Title = "Edit";
 }
 @section HeaderCss{
     <link href="~/Content/css/Home/Customers/updateCustomer/updateCustomer.css" rel="stylesheet" />
@@ -24,7 +24,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("CustomerDetails","Home")" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="CustomerEdit()" class="btn btn-sm btn-neutral">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -54,13 +54,14 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">Ad ve Soyad</label>
-                                            <input type="text" id="input-username" class="form-control" placeholder="Ad Ve Soyad  *" value="Mehmet Engin">
+                                            <input type="text" id="input-username" class="form-control" placeholder="Ad Ve Soyad  *" value="@Model.Musteri_AdSoyad">
+                                            <input style="display:none" type="text" id="input-musteriId" class="form-control" value="@Model.Musteri_Id">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Telefon</label>
-                                            <input type="email" id="input-email" class="form-control" placeholder="Telefon Numarası Giriniz  *" value="0537 568 52 52">
+                                            <input type="email" id="input-telefon" class="form-control" placeholder="Telefon Numarası Giriniz  *" value="@Model.Musteri_Telefon">
                                         </div>
                                     </div>
                                 </div>
@@ -68,33 +69,75 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-first-name">Plaka</label>
-                                            <input type="text" id="input-first-name" class="form-control" placeholder="Plaka Giriniz  *" value="821 ASS 54">
+                                            <input type="text" id="input-plaka" class="form-control" placeholder="Plaka Giriniz  *" value="@Model.Musteri_Plaka">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-last-name">Mail</label>
-                                            <input type="text" id="input-last-name" class="form-control" placeholder="Mail Giriniz  *" value="deneme@gmail.com">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="form-control-label">Adres</label>
-                                            <textarea rows="4" class="form-control" placeholder="Adres Bilgileri Giriniz ...">Merkez/DÜZCE</textarea>
+                                            <input type="text" id="input-mail" class="form-control" placeholder="Mail Giriniz  *" value="@Model.Musteri_Mail">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Cep Telefonu</label>
+                                            <input rows="4" class="form-control" id="input-cepTel" value="@Model.Musteri_CepTelefon" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Adres</label>
+                                            <textarea id="input-adres" rows="2" class="form-control" placeholder="Adres Bilgileri Giriniz ...">@Model.Musteri_Adres</textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                    <!-- end: card body -->
-                    <!-- Card footer -->
-                    <div class="card-footer py-4">
-                    </div>
+                    </form>
+                </div>
+                <!-- end: card body -->
+                <!-- Card footer -->
+                <div class="card-footer py-4">
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 </section>
 
+
+@section CreateStok{
+    <script>
+        function CustomerEdit() {
+            data = {
+                Musteri_Id: $('#input-musteriId').val(),
+                Musteri_AdSoyad: $('#input-username').val(),
+                Musteri_Telefon: $('#input-telefon').val(),
+                Musteri_Plaka: $('#input-plaka').val(),
+                Musteri_Adres: $('#input-mail').val(),
+                Musteri_CepTelefon: $('#input-cepTel').val(),
+                Musteri_Mail: $('#input-adres').val(),
+            }
+            $.ajax({
+                url: '/Customer/Edit/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Musteri_Id > 0) {
+                        toastr.success('Başarıyla Güncellendi! Yönlendiriliyorsunuz');
+                         window.location.href = '@Url.Action("Index","Customer")';
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+    </script>
+}

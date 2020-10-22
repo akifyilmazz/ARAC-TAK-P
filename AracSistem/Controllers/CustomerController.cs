@@ -48,7 +48,26 @@ namespace AracSistem.Controllers
             db.SaveChanges();
             return Json(musteri);
         }
+        [HttpGet]
+        public ActionResult Edit(int? Customer_Id)
+        {
+            var customer = db.Musteri.Find(Customer_Id);
 
+            return View("Edit", customer);
+        }
+        [HttpPost]
+        public JsonResult Edit(Musteri m)
+        {
+            var musteri = db.Musteri.Find(m.Musteri_Id);
+            musteri.Musteri_AdSoyad = m.Musteri_AdSoyad;
+            musteri.Musteri_Telefon= m.Musteri_Telefon;
+            musteri.Musteri_Plaka = m.Musteri_Plaka;
+            musteri.Musteri_Adres = m.Musteri_Adres;
+            musteri.Musteri_CepTelefon = m.Musteri_CepTelefon;
+            musteri.Musteri_Mail = m.Musteri_Mail;
+            db.SaveChanges();
+            return Json(m);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

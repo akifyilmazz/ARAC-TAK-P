@@ -1,6 +1,6 @@
 ﻿@model AracSistem.Models.Musteri
 @{
-    ViewBag.Title = "CustomerDetails";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int i = 0;
 }
@@ -28,7 +28,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("update","Customer")" class="btn btn-sm btn-neutral">Düzenle</a>
+                        <a href="@Url.Action("Edit","Customer", new { Customer_Id= Model.Musteri_Id })" class="btn btn-sm btn-neutral">Düzenle</a>
                     </div>
                 </div>
             </div>

@@ -393,7 +393,6 @@ D:\AracSistem\akifproje\AracSistem\bin\tr\System.Web.Razor.resources.dll
 D:\AracSistem\akifproje\AracSistem\bin\tr\System.Web.WebPages.resources.dll
 D:\AracSistem\akifproje\AracSistem\bin\tr\System.Web.WebPages.Deployment.resources.dll
 D:\AracSistem\akifproje\AracSistem\bin\tr\System.Web.WebPages.Razor.resources.dll
-D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.csprojAssemblyReference.cache
 D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.csproj.CoreCompileInputs.cache
 D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.csproj.CopyComplete
 D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.dll

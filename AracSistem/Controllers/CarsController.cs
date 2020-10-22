@@ -47,7 +47,23 @@ namespace AracSistem.Controllers
             db.SaveChanges();
             return Json(arac);
         }
-        
+        [HttpGet]
+        public ActionResult Edit(int? Arac_Id)
+        {
+            var arac = db.Arac.Find(Arac_Id);
+
+            return View("Edit", arac);
+        }
+        [HttpPost]
+        public JsonResult Edit(Arac a)
+        {
+            var arac = db.Arac.Find(a.Arac_Id);
+            arac.Ruhsat_Id = a.Ruhsat_Id;
+            arac.Arac_Plaka = a.Arac_Plaka;
+            arac.Arac_Sase = a.Arac_Sase;
+            db.SaveChanges();
+            return Json(a);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

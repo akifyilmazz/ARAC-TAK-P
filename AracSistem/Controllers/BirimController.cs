@@ -49,7 +49,21 @@ namespace AracSistem.Controllers
 
             return Json(birim);
         }
+        [HttpGet]
+        public ActionResult Edit(int? Birim_Id)
+        {
+            var birim = db.Birim.Find(Birim_Id);
 
+            return View("Edit", birim);
+        }
+        [HttpPost]
+        public JsonResult Edit(Birim b)
+        {
+            var birim = db.Birim.Find(b.Birim_Id);
+            birim.Birim_Ad = b.Birim_Ad;
+            db.SaveChanges();
+            return Json(b);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
