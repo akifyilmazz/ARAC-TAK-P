@@ -10,6 +10,7 @@ namespace AracSistem.Models
         public DbModel()
             : base("name=DbModel")
         {
+          
         }
 
         public virtual DbSet<Arac> Arac { get; set; }
@@ -91,11 +92,6 @@ namespace AracSistem.Models
 
             modelBuilder.Entity<Musteri>()
                 .Property(e => e.Musteri_Telefon)
-                .IsFixedLength()
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Musteri>()
-                .Property(e => e.Musteri_Plaka)
                 .IsFixedLength()
                 .IsUnicode(false);
 

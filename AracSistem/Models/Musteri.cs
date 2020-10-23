@@ -25,8 +25,7 @@ namespace AracSistem.Models
         [StringLength(10)]
         public string Musteri_Telefon { get; set; }
 
-        [StringLength(10)]
-        public string Musteri_Plaka { get; set; }
+      
 
         [StringLength(250)]
         public string Musteri_Adres { get; set; }

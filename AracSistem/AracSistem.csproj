@@ -183,6 +183,8 @@
     <Compile Include="Models\Stok_Islem.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\StokCreate.cs" />
+    <Compile Include="ViewModels\ViewResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

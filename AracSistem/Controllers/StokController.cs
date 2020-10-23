@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AracSistem.Models;
+using AracSistem.ViewModels;
 
 namespace AracSistem.Controllers
 {
@@ -15,10 +16,19 @@ namespace AracSistem.Controllers
         private DbModel db = new DbModel();
 
         // GET: Stok
-        public ActionResult Index()
+        public ActionResult Index(int sayfa = 0)
         {
-            var stok = db.Stok.ToList();
-            return View(stok);
+            int toplamKayit = db.Stok.Count();
+            var stok = db.Stok.OrderBy(x => x.Stok_Id).Skip(10/1*sayfa).Take(10).ToList();
+            
+            ViewResult<Stok> stoklar = new ViewResult<Stok>()
+            {
+                toplamKayit = toplamKayit,
+                Veri = stok,
+                aktifSayfa=sayfa
+            };
+
+            return View(stoklar);
         }
 
         // GET: Stok/Details/5
@@ -38,16 +48,18 @@ namespace AracSistem.Controllers
 
         public ActionResult Create()
         {
-        
-            return View();
+            StokCreate stokCreate = new StokCreate();
+            stokCreate.Birims = db.Birim.ToList();
+            stokCreate.Kategoris = db.Kategori.ToList();
+            return View(stokCreate);
         }
 
         [HttpPost]
         public JsonResult Create(Stok stok)
         {
             db.Stok.Add(stok);
-            db.SaveChanges();
-            return Json(stok);
+            var result = db.SaveChanges();
+            return Json(result);
         }
         [HttpGet]
         public ActionResult Edit(int? Stok_Id)
