@@ -1,0 +1,103 @@
+﻿@model AracSistem.Models.Kategori
+@{
+    ViewBag.Title = "Edit";
+}
+@section HeaderCss{
+    <link href="~/Content/css/Home/Cars/addCars/addCars.css" rel="stylesheet" />
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+}
+
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Kategori")">Kategori</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Edit","Kategori", new { Kategori_Id= Model.Kategori_Id })">Kategori Detay</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Kategori Düzenle</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="javascript:;" onclick="editKategori()" class="btn btn-sm btn-neutral">Kaydet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-0" style="">Kategori Düzenle</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Card header -->
+                    <!-- card body -->
+                    <div class="card-body">
+                        <form>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Kategori Ad</label>
+                                            <input style="display:none" type="text" id="input-kategoriId" class="form-control" value="@Model.Kategori_Id">
+                                            <input type="text" id="input-kategoriAd" class="form-control" placeholder="Kategori giriniz  *" value="@Model.Kategori_Ad">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end: card body -->
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section CreateKategori{
+    <script>
+        function editKategori() {
+            data = {
+                Kategori_Id: $('#input-kategoriId').val(),
+                Kategori_Ad: $('#input-kategoriAd').val(),
+            }
+            $.ajax({
+                url: '/Kategori/Edit/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Kategori_Id > 0) {
+                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                         window.location.href = '@Url.Action("Index", "Kategori")';
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+
+    </script>
+}

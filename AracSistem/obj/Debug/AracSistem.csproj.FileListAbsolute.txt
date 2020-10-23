@@ -397,3 +397,4 @@ D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.csproj.CoreCompileInputs
 D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.csproj.CopyComplete
 D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.dll
 D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.pdb
+D:\AracSistem\akifproje\AracSistem\obj\Debug\AracSistem.csprojAssemblyReference.cache

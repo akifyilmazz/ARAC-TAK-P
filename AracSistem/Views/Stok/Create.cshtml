@@ -52,10 +52,20 @@
                         <form>
                             <div class="pl-lg-4">
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Kategori</label>
+                                                <select class="form-control" name="kategori" id="input-kategori"></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">BARKOD</label>
-                                            <input type="text" id="input-barkod" class="form-control" placeholder="Barkod girinz  *">
+                                            <input class="form-control" name="kategori" id="input-barkod"></input>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -79,7 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </form>
                     </div>
@@ -96,7 +106,7 @@
 
 @section CreateStok{
     <script>
-        function stokEkle(){
+        function stokEkle() {
             data = {
                 Kategori_Id: 1,
                 Birim_Id: 1,
@@ -123,6 +133,48 @@
                 }
             });
         }
-        
     </script>
-    }
+
+    <script>
+        $(function () {
+            //aynı ajaxmı kullanıcağımdan dolayı ajaxsetup oluştuyorum
+            $.ajaxSetup({
+                type: "post",
+                url: "/Kategori/KategoriGetir",//controlerımda gidicek olan yerim
+                dataType: "json"
+            });
+            $.extend({
+                KategoriGetir: function () {
+                    $.ajax({
+                        //datamızı gönderiyoruz
+                        data: {
+                            kategori_Id:: $('#input-ad').val(),
+                        },
+                        success: function (sonuc) {
+                            //gelen sonucumuz kontrol ediyoruz ona göre selectimze append işlemi gerçekleştiyoruz
+                            if (sonuc.ok) {
+
+                                $.each(sonuc.text, function (index, item) {
+                                    var kategori = '<option value="' + item.Value + '">' + item.Text + '</option>';
+                                    $("#input-kategori").append(kategori);
+
+                                });
+
+                            } else {
+                                $.each(sonuc.text, function (index, item) {
+                                    var kategori = '<option value="' + item.Value + '">' + item.Text + '</option>';
+                                    $("#input-kategori").append(kategori);
+
+                                });
+
+                            }
+                        }
+                    });
+                },
+            });
+            //barkodGetir çalıştıyoruz
+            $.KategoriGetir();
+           
+        });
+    </script>
+}

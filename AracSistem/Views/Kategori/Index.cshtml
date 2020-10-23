@@ -1,15 +1,12 @@
-﻿@model List<AracSistem.Models.Stok>
+﻿@model List<AracSistem.Models.Kategori>
 @{
-    ViewBag.Title = "Stocks";
+    ViewBag.Title = "Kategori";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int i = 0;
 }
 @section HeaderCss{
-
-    <link href="~/Content/css/Home/Stocks/Stocks.css" rel="stylesheet" />
+    <link href="~/Content/css/Home/Cars/Cars.css" rel="stylesheet" />
     <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
 }
-
 <section>
     <div class="header bg-primary pb-6">
         <div class="container-fluid">
@@ -20,12 +17,12 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Stoklar</li>
+                                <li class="breadcrumb-item active" aria-current="page">Kategori</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("Create","Stok")" class="btn btn-sm btn-neutral">Ekle</a>
+                        <a href="@Url.Action("Create","Kategori")" class="btn btn-sm btn-neutral">Ekle</a>
                     </div>
                 </div>
             </div>
@@ -42,13 +39,14 @@
                     <div class="card-header border-0">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2 class="mb-0" style="text-align:left;font-weight:bold">Stok Bilgileri</h2>
+                                <h2 class="mb-0" style="text-align:left;font-weight:bold">Kategori</h2>
                             </div>
                             <div class="col-md-6 searc">
                                 <form class="navbar-search navbar-search-light mr-sm-3" id="navbar-search-main">
                                     <div class="form-group mb-0">
                                         <div class="input-group input-group-alternative input-group-merge">
-                                            <input class="form-control" placeholder="Stok Ara *" type="text">
+
+                                            <input class="form-control" placeholder="Kategori Ara *" type="text">
                                             <div class="input-group-prepend">
                                                 <a href="#" class="input-group-text"><i class="fas fa-search"></i></a>
                                             </div>
@@ -61,48 +59,31 @@
                     <!-- end: Card header -->
                     <!-- Light table -->
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush" style="text-align:center">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="sort" data-sort="completion">#</th>
-                                    <th scope="col" class="sort" data-sort="name">Barkod</th>
-                                    <th scope="col" class="sort" data-sort="budget">Stok Ad</th>
-                                    <th scope="col" class="sort" data-sort="status">Alış Fiyat</th>
-                                    <th scope="col" class="sort" data-sort="status">Satış Fiyat</th>
-                                    <th scope="col" class="sort" data-sort="status"></th>
+                                    <th scope="col" class="sort" data-sort="name">Kategori Ad</th>
+                                    <th scope="col" class="sort" data-sort="budget"></th>
                                 </tr>
                             </thead>
                             <tbody class="list ayrinti">
-
                                 @foreach (var item in Model)
                                 {
                                     <tr>
                                         <th scope="row">
                                             <div class="media align-items-center">
-                                                <div class="media-body">
-                                                    <span class="name mb-0 text-sm">@item.Stok_Id</span>
-                                                </div>
-                                            </div>
-                                        </th>
 
-                                        <th scope="row">
-                                            <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm">@item.Stok_Barkod</span>
+                                                    <span class="name mb-0 text-sm">(@item.Kategori_Id)</span>
                                                 </div>
                                             </div>
                                         </th>
                                         <td class="budget">
-                                            @item.Stok_Ad
-                                        </td>
-                                        <td class="budget">
-                                            @item.Stok_AlisFiyat <span class="name mb-0 text-sm cssBold">₺</span>
-                                        </td>
-                                        <td class="budget">
-                                            @item.Stok_SatisFiyat <span class="name mb-0 text-sm cssBold">₺</span>
+                                            @item.Kategori_Ad
                                         </td>
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="@Url.Action("Details", "Stok", new { id = item.Stok_Id })" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="@Url.Action("Edit", "Kategori", new { Kategori_Id= item.Kategori_Id })">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                         </td>
@@ -141,4 +122,5 @@
             </div>
         </div>
     </div>
+
 </section>
