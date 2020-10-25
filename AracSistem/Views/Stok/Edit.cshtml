@@ -25,7 +25,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="EditEkle()" class="btn btn-sm btn-neutral">Güncelle</a>
+                        <a href="javascript:;" onclick="EditEkle()" class="btn btn-success">Güncelle</a>
                     </div>
                 </div>
             </div>
@@ -56,13 +56,13 @@
                                         <div class="form-group">
                                             <input type="text" id="input-StokId" class="form-control" value="@Model.Stok_Id" style="display:none" />
                                             <label class="form-control-label" for="input-username">Kategori</label>
-                                            <input type="text" id="input-kategori" class="form-control" value="@Model.Kategori_Id">
+                                            <input type="text" id="input-kategori" class="form-control" value="@Model.Kategori.Kategori_Ad">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Birim</label>
-                                            <input type="text" id="input-birim" class="form-control" value="@Model.Birim_Id">
+                                            <input type="text" id="input-birim" class="form-control" value="@Model.Birim.Birim_Ad">
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,9 @@
                 success: function (data) {
                     if (data.Stok_Id > 0) {
                         toastr.success('Başarıyla Güncellendi! Yönlendiriliyorsunuz');
-                         window.location.href = '@Url.Action("Index","Stok")';
+                         setTimeout(function () {
+                             window.location = "/Stok"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

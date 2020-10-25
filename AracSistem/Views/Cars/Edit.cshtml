@@ -25,7 +25,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="CarsEdit()" class="btn btn-sm btn-neutral">Güncelle</a>
+                        <a href="javascript:;" onclick="CarsEdit()" class="btn btn-success">Güncelle</a>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,9 @@
                 success: function (data) {
                     if (data.Arac_Id > 0) {
                         toastr.success('Başarıyla Güncellendi! Yönlendiriliyorsunuz');
-                         window.location.href = '@Url.Action("Index","Cars")';
+                        setTimeout(function () {
+                            window.location = "/Birim"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

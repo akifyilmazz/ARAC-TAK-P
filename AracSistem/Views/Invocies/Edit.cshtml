@@ -25,7 +25,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="InvociesEdit()" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="InvociesEdit()" class="btn btn-success">Güncelle</a>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,9 @@
                 success: function (data) {
                     if (data.Fatura_Id > 0) {
                         toastr.success('Başarıyla Güncellendi! Yönlendiriliyorsunuz');
-                         window.location.href = '@Url.Action("Index","Invocies")';
+                        setTimeout(function () {
+                            window.location = "/Invocies"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

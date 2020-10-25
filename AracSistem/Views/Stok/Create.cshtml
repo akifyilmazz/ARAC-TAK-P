@@ -26,7 +26,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="stokEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="stokEkle()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -144,7 +144,6 @@
                         setTimeout(function () {
                             window.location="/stok"
                         }, 250)
-                        //buraya yönlendirme koyulacak
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {
@@ -156,46 +155,4 @@
         }
     </script>
 
-    @*<script>
-        $(function () {
-            //aynı ajaxmı kullanıcağımdan dolayı ajaxsetup oluştuyorum
-            $.ajaxSetup({
-                type: "post",
-                url: "/Kategori/KategoriGetir",//controlerımda gidicek olan yerim
-                dataType: "json"
-            });
-            $.extend({
-                KategoriGetir: function () {
-                    $.ajax({
-                        //datamızı gönderiyoruz
-                        data: {
-                            kategori_Id: $('#input-ad').val(),
-                        },
-                        success: function (sonuc) {
-                            //gelen sonucumuz kontrol ediyoruz ona göre selectimze append işlemi gerçekleştiyoruz
-                            if (sonuc.ok) {
-
-                                $.each(sonuc.text, function (index, item) {
-                                    var kategori = '<option value="' + item.Value + '">' + item.Text + '</option>';
-                                    $("#input-kategori").append(kategori);
-
-                                });
-
-                            } else {
-                                $.each(sonuc.text, function (index, item) {
-                                    var kategori = '<option value="' + item.Value + '">' + item.Text + '</option>';
-                                    $("#input-kategori").append(kategori);
-
-                                });
-
-                            }
-                        }
-                    });
-                },
-            });
-            //barkodGetir çalıştıyoruz
-            $.KategoriGetir();
-           
-        });
-    </script>*@
 }

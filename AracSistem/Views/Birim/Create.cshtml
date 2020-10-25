@@ -24,7 +24,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="birimEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="birimEkle()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,9 @@
                 success: function (data) {
                     if (data.Birim_Id > 0) {
                         toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
-                        //buraya yönlendirme koyulacak
+                        setTimeout(function () {
+                            window.location = "/Birim"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

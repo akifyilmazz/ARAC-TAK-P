@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AracSistem.Models;
+using AracSistem.ViewModels;
 
 namespace AracSistem.Controllers
 {
@@ -15,10 +16,18 @@ namespace AracSistem.Controllers
         private DbModel db = new DbModel();
 
         // GET: Birim
-        public ActionResult Index()
+        public ActionResult Index(int sayfa = 0)
         {
-            var birim = db.Birim.ToList();
-            return View(birim);
+            int toplamKayit = db.Birim.Count();
+            var birim = db.Birim.OrderBy(x => x.Birim_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+
+            ViewResult<Birim> birimler = new ViewResult<Birim>()
+            {
+                toplamKayit = toplamKayit,
+                Veri = birim,
+                aktifSayfa = sayfa
+            };
+            return View(birimler);
         }
 
         // GET: Birim/Details/5

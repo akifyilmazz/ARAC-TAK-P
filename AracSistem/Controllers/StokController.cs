@@ -19,13 +19,13 @@ namespace AracSistem.Controllers
         public ActionResult Index(int sayfa = 0)
         {
             int toplamKayit = db.Stok.Count();
-            var stok = db.Stok.OrderBy(x => x.Stok_Id).Skip(10/1*sayfa).Take(10).ToList();
-            
+            var stok = db.Stok.OrderBy(x => x.Stok_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+
             ViewResult<Stok> stoklar = new ViewResult<Stok>()
             {
                 toplamKayit = toplamKayit,
                 Veri = stok,
-                aktifSayfa=sayfa
+                aktifSayfa = sayfa
             };
 
             return View(stoklar);
@@ -39,6 +39,8 @@ namespace AracSistem.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Stok stok = db.Stok.Find(id);
+
+
             if (stok == null)
             {
                 return HttpNotFound();
@@ -65,8 +67,7 @@ namespace AracSistem.Controllers
         public ActionResult Edit(int? Stok_Id)
         {
             var stok = db.Stok.Find(Stok_Id);
-
-            return View("Edit", stok);
+            return View(stok);
         }
         [HttpPost]
         public JsonResult Edit(Stok s)

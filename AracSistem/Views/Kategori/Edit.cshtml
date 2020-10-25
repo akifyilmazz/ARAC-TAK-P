@@ -18,13 +18,12 @@
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Kategori")">Kategori</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("Edit","Kategori", new { Kategori_Id= Model.Kategori_Id })">Kategori Detay</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Kategori Düzenle</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="editKategori()" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="editKategori()" class="btn btn-success">Güncelle</a>
                     </div>
                 </div>
             </div>
@@ -88,7 +87,9 @@
                 success: function (data) {
                     if (data.Kategori_Id > 0) {
                         toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
-                         window.location.href = '@Url.Action("Index", "Kategori")';
+                         setTimeout(function () {
+                             window.location = "/Kategori"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

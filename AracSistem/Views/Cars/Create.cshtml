@@ -1,4 +1,5 @@
-﻿
+﻿@using AracSistem.ViewModels
+@model CarsCreat
 @{
     ViewBag.Title = "addCars";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,7 +25,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="aracEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="aracEkle()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -51,6 +52,17 @@
                         <form>
                             <div class="pl-lg-4">
                                 <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Ruhsat</label>
+                                            <select class="form-control" name="ruhsatId" id="input-ruhsatId">
+                                                @foreach (var item in Model.Ruhsats)
+                                                {
+                                                    <option value="@item.Ruhsat_Id">@item.Ruhsat_No</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">PLAKA</label>
@@ -84,7 +96,7 @@
             data = {
                 Arac_Plaka: $('#input-plaka').val(),
                 Arac_Sase: $('#input-sase').val(),
-                Ruhsat_Id: 2,
+                Ruhsat_Id: $('#input-ruhsatId').val(),
             }
             $.ajax({
                 url: '/Cars/Create/',
@@ -94,7 +106,9 @@
                 success: function (data) {
                     if (data.Arac_Id > 0) {
                         toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
-                        //buraya yönlendirme koyulacak
+                        setTimeout(function () {
+                            window.location = "/Cars"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

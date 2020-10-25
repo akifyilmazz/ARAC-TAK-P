@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AracSistem.Models;
+using AracSistem.ViewModels;
 
 namespace AracSistem.Controllers
 {
@@ -15,10 +16,18 @@ namespace AracSistem.Controllers
         private DbModel db = new DbModel();
 
         // GET: Cars
-        public ActionResult Index()
+        public ActionResult Index(int sayfa = 0)
         {
-            var arac = db.Arac.ToList();
-            return View(arac);
+            int toplamKayit = db.Arac.Count();
+            var arac = db.Arac.OrderBy(x => x.Arac_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+
+            ViewResult<Arac> araclar = new ViewResult<Arac>()
+            {
+                toplamKayit = toplamKayit,
+                Veri = arac,
+                aktifSayfa = sayfa
+            };
+            return View(araclar);
         }
 
         // GET: Cars/Details/5
@@ -33,12 +42,15 @@ namespace AracSistem.Controllers
             {
                 return HttpNotFound();
             }
+            
             return View(arac);
         }
 
         public ActionResult Create()
         {
-            return View();
+            CarsCreat aracCreat = new CarsCreat();
+            aracCreat.Ruhsats = db.Ruhsat.ToList();
+            return View(aracCreat);
         }
         [HttpPost]
         public JsonResult Create(Arac arac)
@@ -64,6 +76,19 @@ namespace AracSistem.Controllers
             db.SaveChanges();
             return Json(a);
         }
+
+        public ActionResult Delete(int? Arac_Id)
+        {
+            if (Arac_Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var arac = db.Arac.Find(Arac_Id);
+            db.Arac.Remove(arac);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

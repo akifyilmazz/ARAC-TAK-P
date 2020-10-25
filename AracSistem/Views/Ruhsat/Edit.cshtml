@@ -1,0 +1,120 @@
+﻿@model AracSistem.Models.Ruhsat
+@{
+    ViewBag.Title = "Edit";
+}
+
+@section HeaderCss{
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+    <link href="~/Content/css/Home/Stocks/addStocks/addStocks.css" rel="stylesheet" />
+}
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Ruhsat")">Ruhsatlar</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ruhsatlar Düzenle</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="javascript:;" onclick="RuhsatEdit()" class="btn btn-success">Güncelle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-0" style="">Ruhsatlar Düzenle</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Card header -->
+                    <!-- card body -->
+                    <div class="card-body">
+                        <form>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <input type="text" id="input-RuhsatId" class="form-control" value="@Model.Ruhsat_Id" style="display:none" />
+                                            <label class="form-control-label" for="input-username">Müşteri</label>
+                                            <input type="text" id="input-MusteriId" class="form-control" value="@Model.Musteri.Musteri_AdSoyad">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Eklenme Tarihi</label>
+                                            <input type="datetime" id="input-RuhsatEklenmeTarih" class="form-control" value="@Model.Ruhsat_EklenmeTarih">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Ruhsat No</label>
+                                            <input type="text" id="input-RuhsatNo" class="form-control" value="@Model.Ruhsat_No">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end: card body -->
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section CreateStok{
+    <script>
+        function RuhsatEdit() {
+            data = {
+                Ruhsat_Id: $('#input-RuhsatId').val(),
+                Musteri_Id: 7,
+                Ruhsat_EklenmeTarih: $('#input-RuhsatEklenmeTarih').val(),
+                Ruhsat_No: $('#input-RuhsatNo').val(),
+            }
+
+            $.ajax({
+                url: '/Ruhsat/Edit/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Ruhsat_Id > 0) {
+                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                        setTimeout(function () {
+                            window.location = "/Ruhsat"
+                        }, 250)
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+    </script>
+}
+

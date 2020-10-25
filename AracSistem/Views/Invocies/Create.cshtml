@@ -1,4 +1,5 @@
-﻿
+﻿@using AracSistem.ViewModels
+@model FaturaCreat
 @{
     ViewBag.Title = "addInvoices";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,7 +26,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="FaturaEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="FaturaEkle()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -54,6 +55,31 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
+                                            <label class="form-control-label" for="input-username">İşlem Türü</label>
+                                            <select class="form-control" name="islemTur" id="input-islemTur">
+                                                @foreach (var item in Model.IslemTurs)
+                                                {
+                                                    <option value="@item.IslemTur_Id">@item.IslemTur_Ad</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Ödeme Şekli</label>
+                                            <select class="form-control" name="odemeSekli" id="input-odemeSekli">
+                                                @foreach (var item in Model.OdemeSeklis)
+                                                {
+                                                    <option value="@item.OdemeSekli_Id">@item.OdemeSekli_Ad</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
                                             <label class="form-control-label" for="input-username">Fatura Tarihi</label>
                                             <input class="form-control" type="datetime-local" value="" id="input-tarih">
                                         </div>
@@ -69,7 +95,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label">Barkod</label>
-                                            <input  type="text" class="form-control" placeholder="Barkod ..." id="input-barkod">
+                                            <input type="text" class="form-control" placeholder="Barkod ..." id="input-barkod">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -97,8 +123,8 @@
     <script>
         function FaturaEkle() {
             data = {
-                IslemTur_Id: 2,
-                OdemeSekli_Id: 1,
+                IslemTur_Id: $('#input-islemTur').val(),
+                OdemeSekli_Id: $('#input-odemeSekli').val(),
                 AracIslem_Id: 1,
                 Fatura_Tarih: $('#input-tarih').val(),
                 Fatura_Tutar: $('#input-tutar').val(),
@@ -113,7 +139,9 @@
                 success: function (data) {
                     if (data.Fatura_Id > 0) {
                         toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
-                        //buraya yönlendirme koyulacak
+                        setTimeout(function () {
+                            window.location = "/Invocies"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

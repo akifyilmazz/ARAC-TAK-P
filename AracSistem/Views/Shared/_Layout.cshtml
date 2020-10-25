@@ -59,14 +59,20 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="@Url.Action("Index","Birim")">
-                                    <i class="ni ni-vector"></i>
+                                    <i class="fas fa-book"></i>
                                     <span class="nav-link-text">Birimler</span>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="@Url.Action("Index","Kategori")">
-                                    <i class="ni ni-vector"></i>
+                                    <i class="fas fa-cubes"></i>
                                     <span class="nav-link-text">Kategori</span>
+                                </a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link " href="@Url.Action("Index","Ruhsat")">
+                                    <i class="ni ni-vector"></i>
+                                    <span class="nav-link-text">Ruhsat</span>
                                 </a>
                             </li>
                         </ul>
@@ -160,5 +166,8 @@
     @RenderSection("CreateFatura", required: false)
     @RenderSection("CreateBirim", required: false)
     @RenderSection("CreateKategori", required: false)
+    @RenderSection("CreateRuhsat", required: false)
+    @RenderSection("profileEdit", required: false)
+    
 </body>
 </html>

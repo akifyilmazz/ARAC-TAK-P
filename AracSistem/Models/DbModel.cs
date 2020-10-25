@@ -26,6 +26,7 @@ namespace AracSistem.Models
         public virtual DbSet<Stok> Stok { get; set; }
         public virtual DbSet<Stok_Islem> Stok_Islem { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<User> User{ get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

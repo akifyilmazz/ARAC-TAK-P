@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AracSistem.Models;
+using AracSistem.ViewModels;
 
 namespace AracSistem.Controllers
 {
@@ -15,10 +16,19 @@ namespace AracSistem.Controllers
         private DbModel db = new DbModel();
 
         // GET: Fatura
-        public ActionResult Index()
+        public ActionResult Index(int sayfa = 0)
         {
-            var fatura = db.Fatura.ToList();
-            return View(fatura);
+            int toplamKayit = db.Fatura.Count();
+            var fatura = db.Fatura.OrderBy(x => x.Fatura_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+
+            ViewResult<Fatura> faturalar= new ViewResult<Fatura>()
+            {
+                toplamKayit = toplamKayit,
+                Veri = fatura,
+                aktifSayfa = sayfa
+            };
+
+            return View(faturalar);
         }
 
         // GET: Fatura/Details/5
@@ -33,12 +43,16 @@ namespace AracSistem.Controllers
             {
                 return HttpNotFound();
             }
-            return View(fatura);
+            var sonuc = db.Fatura.Where(x => x.Fatura_Id == fatura.Fatura_Id).FirstOrDefault();
+            return View(sonuc);
         }
 
         public ActionResult Create()
         {
-            return View();
+            FaturaCreat faturaCreate = new FaturaCreat();
+            faturaCreate.OdemeSeklis = db.OdemeSekli.ToList();
+            faturaCreate.IslemTurs = db.IslemTur.ToList();
+            return View(faturaCreate);
         }
 
         [HttpPost]

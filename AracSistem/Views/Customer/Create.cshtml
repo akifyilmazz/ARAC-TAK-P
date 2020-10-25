@@ -24,7 +24,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="customerEkle()" class="btn btn-sm btn-neutral">Kaydet</a>
+                        <a href="javascript:;" onclick="customerEkle()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -79,10 +79,10 @@
                                             <input type="text" id="input-ceptel" class="form-control" placeholder="Cep Telefonu Giriniz  *">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label">Adres</label>
-                                            <textarea rows="4" class="form-control" id="input-adres" placeholder="Adres Bilgileri Giriniz ..."></textarea>
+                                            <textarea rows="6" class="form-control" id="input-adres" placeholder="Adres Bilgileri Giriniz ..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -116,10 +116,10 @@
                 data: data,
                 dataType: 'json',
                 success: function (data) {
-                    if (data.Musteri_Id > 0) {
                         toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
-                        //buraya yönlendirme koyulacak
-                    }
+                        setTimeout(function () {
+                            window.location = "/Customer"
+                        }, 250)
                 },
                 error: function (hata, ajaxOptions, thrownError) {
                     alert(hata.status);

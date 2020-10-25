@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Stocks";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+    int j = 0;
+
 }
 @section HeaderCss{
 
@@ -26,7 +27,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("Create","Stok")" class="btn btn-sm btn-neutral">Ekle</a>
+                        <a href="@Url.Action("Create","Stok")" class="btn btn-success">Stok Ekle</a>
                     </div>
                 </div>
             </div>
@@ -77,11 +78,12 @@
 
                                 @foreach (var item in Model.Veri)
                                 {
+                                    j++;
                                     <tr>
                                         <th scope="row">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <span class="name mb-0 text-sm">@item.Stok_Id</span>
+                                                    <span class="name mb-0 text-sm">@j</span>
                                                 </div>
                                             </div>
                                         </th>
@@ -104,7 +106,7 @@
                                         </td>
                                         <td class="text-center">
                                             <a class="btn btn-sm btn-icon-only text-light" href="@Url.Action("Details", "Stok", new { id = item.Stok_Id })" role="button" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-search"></i>
+                                                <i class="far fa-edit fa-lg"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -134,22 +136,18 @@
                                             </a>
                                         }
                                     }
-
                                 </li>
-                                
-
                                 @for (int i = 0; i < Math.Ceiling(decimal.Parse(Convert.ToDecimal(Model.toplamKayit / 10).ToString())); i++)
                                 {
 
                                     if (i == 0)
                                     {
-                                        <li class="page-item @(Model.aktifSayfa == i ? "active":"")"><a href="@Url.Action("Index","Stok")" class="page-link">@(i+1)</a></li>
+                                        <li class="page-item @(Model.aktifSayfa == i ? "active":"")"><a href="@Url.Action("Index","Stok")" class="page-link">@(i + 1)</a></li>
                                     }
                                     else
                                     {
-                                        <li class="page-item @(Model.aktifSayfa == i ? "active":"")"><a href="@Url.Action("Index","Stok",new { sayfa=i})" class="page-link">@(i+1)</a></li>
+                                        <li class="page-item @(Model.aktifSayfa == i ? "active":"")"><a href="@Url.Action("Index","Stok",new { sayfa=i})" class="page-link">@(i + 1)</a></li>
                                     }
-
                                 }
                                 @if (Math.Ceiling(decimal.Parse(Convert.ToDecimal(Model.toplamKayit / 10).ToString())) > Model.aktifSayfa + 1)
                                 {
@@ -160,16 +158,10 @@
                                         </a>
                                     </li>
                                 }
-
-                                @*<li class="page-item">
-            <a class="page-link" href="#">
-                <i class="fas fa-angle-right"></i>
-                <span class="sr-only">Next</span>
-            </a>
-        </li>*@
                             </ul>
                         </nav>
                     </div>
+                    <!-- end: Card footer -->
                 </div>
             </div>
         </div>
