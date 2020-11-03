@@ -1,0 +1,27 @@
+﻿/*detay card*/
+.col-xl-3 {
+    max-width: 60% !important;
+}
+
+.detay .row span {
+}
+
+.detay .row .col-md-12 {
+    margin-top: 5%
+}
+
+.detay .row.bosluk {
+    margin-top: 5% !important
+}
+
+.detay .row span {
+    font-size: 14px;
+}
+
+.card-body.detay {
+    box-shadow: 0px 0px 8px 2px rgb(188 188 188 / 75%)
+}
+
+card-body.detay .row .col-md-3, card-body.detay .row .col-md-3 {
+    text-align: center
+}

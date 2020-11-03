@@ -10,7 +10,7 @@ namespace AracSistem.Models
         public DbModel()
             : base("name=DbModel")
         {
-          
+            //this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Arac> Arac { get; set; }

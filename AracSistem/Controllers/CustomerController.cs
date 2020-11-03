@@ -33,18 +33,12 @@ namespace AracSistem.Controllers
         // GET: Customer/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Musteri musteri = db.Musteri.Find(id);
-            if (musteri == null)
-            {
-                return HttpNotFound();
-            }
-            var sonuc = db.Ruhsat.Where(x => x.Musteri_Id == musteri.Musteri_Id).FirstOrDefault();
+            CustomerDetails CustomerDetais = new CustomerDetails();
+            CustomerDetais.Musteris = db.Musteri.Where(x => x.Musteri_Id == id).FirstOrDefault();
+            CustomerDetais.Ruhsats = db.Ruhsat.Where(x => x.Musteri_Id == id).ToList();
+           
                 
-            return View(sonuc);
+            return View(CustomerDetais);
         }
 
         public ActionResult Create()

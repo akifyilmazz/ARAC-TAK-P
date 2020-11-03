@@ -15,13 +15,12 @@ namespace AracSistem.Controllers
     {
         private DbModel db = new DbModel();
 
-        // GET: Fatura
         public ActionResult Index(int sayfa = 0)
         {
             int toplamKayit = db.Fatura.Count();
             var fatura = db.Fatura.OrderBy(x => x.Fatura_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
 
-            ViewResult<Fatura> faturalar= new ViewResult<Fatura>()
+            ViewResult<Fatura> faturalar = new ViewResult<Fatura>()
             {
                 toplamKayit = toplamKayit,
                 Veri = fatura,
@@ -31,7 +30,7 @@ namespace AracSistem.Controllers
             return View(faturalar);
         }
 
-        // GET: Fatura/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,44 +43,58 @@ namespace AracSistem.Controllers
                 return HttpNotFound();
             }
             var sonuc = db.Fatura.Where(x => x.Fatura_Id == fatura.Fatura_Id).FirstOrDefault();
+            var stokIslem = sonuc.IslemTur.Stok_Islem.ToList();
             return View(sonuc);
         }
 
         public ActionResult Create()
         {
-            FaturaCreat faturaCreate = new FaturaCreat();
-            faturaCreate.OdemeSeklis = db.OdemeSekli.ToList();
-            faturaCreate.IslemTurs = db.IslemTur.ToList();
-            return View(faturaCreate);
+            var musteri = db.Musteri.ToList();
+            return View(musteri);
+        }
+
+        public ActionResult NewInvoiceSales(int? musteri_Id)
+        {
+            FaturaCreat FaturaCreats = new FaturaCreat();
+            {
+                FaturaCreats.Musteris = db.Musteri.Where(x => x.Musteri_Id == musteri_Id).First();
+                FaturaCreats.Arac_Islems = db.Arac_Islem.ToList();
+                FaturaCreats.IslemTurs = db.IslemTur.ToList();
+                FaturaCreats.OdemeSeklis = db.OdemeSekli.ToList();
+                FaturaCreats.Stoks = db.Stok.ToList();
+                FaturaCreats.Aracs = db.Arac.Where(x => x.Ruhsat.Musteri_Id == musteri_Id).ToList();
+            }
+            return View(FaturaCreats);
+        }
+
+
+        [HttpPost]
+        public JsonResult NewInvoiceSales(NewInvociesSales faturaBilg)
+        {
+            db.Arac_Islem.Add(faturaBilg.Arac_Islems[0]);
+            faturaBilg.Fatura[0].AracIslem_Id = faturaBilg.Arac_Islems[0].AracIslem_Id;
+
+            db.Fatura.Add(faturaBilg.Fatura[0]);
+
+            Stok_Islem stokIslem = new Stok_Islem();
+            for (int i = 0; i < faturaBilg.Stoks.Count(); i++)
+            {
+                stokIslem.Stok_Id = faturaBilg.Stoks[i].Stok_Id;
+                stokIslem.IslemTur_Id = faturaBilg.Fatura[0].IslemTur_Id;
+                stokIslem.StokIslem_Miktar = 1;
+                stokIslem.StokIslem_Tarih = faturaBilg.Fatura[0].Fatura_Tarih;
+                db.Stok_Islem.Add(stokIslem);
+                db.SaveChanges();
+            }
+
+            return Json(faturaBilg);
         }
 
         [HttpPost]
-        public JsonResult Create(Fatura fatura)
+        public ActionResult Test(int a)
         {
-            db.Fatura.Add(fatura);
-            db.SaveChanges();
-            return Json(fatura);
-        }
-
-        [HttpGet]
-        public ActionResult Edit(int? Fatura_Id)
-        {
-            var fatura = db.Fatura.Find(Fatura_Id);
-
-            return View("Edit", fatura);
-        }
-        [HttpPost]
-        public JsonResult Edit(Fatura ft)
-        {
-            var fatura = db.Fatura.Find(ft.Fatura_Id);
-            fatura.IslemTur_Id = ft.IslemTur_Id;
-            fatura.OdemeSekli_Id = ft.OdemeSekli_Id;
-            fatura.AracIslem_Id = ft.AracIslem_Id;
-            fatura.Fatura_Tarih = ft.Fatura_Tarih;
-            fatura.Fatura_Tutar = ft.Fatura_Tutar;
-            fatura.Fatura_Aciklama = ft.Fatura_Aciklama;
-            db.SaveChanges();
-            return Json(ft);
+            var stok = db.Stok.Where(x => x.Stok_Id == a).FirstOrDefault();
+            return PartialView(stok);
         }
 
         protected override void Dispose(bool disposing)

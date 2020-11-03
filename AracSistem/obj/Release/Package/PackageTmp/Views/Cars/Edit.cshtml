@@ -1,0 +1,114 @@
+﻿@model AracSistem.Models.Arac
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeaderCss{
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+    <link href="~/Content/css/Home/Stocks/addStocks/addStocks.css" rel="stylesheet" />
+}
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Details","Cars")">Arac Detay</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Edit","Cars")">Arac Düzenle</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Arac Düzenle</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="javascript:;" onclick="CarsEdit()" class="btn btn-success">Güncelle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-0" style="">Araç Düzenle</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Card header -->
+                    <!-- card body -->
+                    <div class="card-body">
+                        <form>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">PLAKA</label>
+                                            <input type="text" id="input-plaka" class="form-control" placeholder="Plaka giriniz  *" value="@Model.Arac_Plaka">
+                                            <input type="text" id="input-aracId" class="form-control" value="@Model.Arac_Id" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">ŞASE</label>
+                                            <input type="email" id="input-sase" class="form-control" placeholder="Şase bilgisi Giriniz  *" value="@Model.Arac_Sase">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- end: card body -->
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section CreateStok{
+    <script>
+        function CarsEdit() {
+            data = {
+                Arac_Id: $('#input-aracId').val(),
+                Ruhsat_Id: 2,
+                Arac_Plaka: $('#input-plaka').val(),
+                Arac_Sase: $('#input-sase').val(),
+            }
+            $.ajax({
+                url: '/Cars/Edit/',
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Arac_Id > 0) {
+                        toastr.success('Başarıyla Güncellendi! Yönlendiriliyorsunuz');
+                        setTimeout(function () {
+                            window.location = "/Birim"
+                        }, 250)
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+    </script>
+}

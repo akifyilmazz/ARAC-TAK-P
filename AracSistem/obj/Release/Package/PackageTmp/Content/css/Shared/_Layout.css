@@ -1,0 +1,45 @@
+﻿body {
+    Background-color: #cdced5;
+}
+
+    body .sidenav-header h2 {
+        text-align: center;
+        padding-top: 8px;
+        font-weight: bold;
+        font-size: 28px;
+    }
+.sidenav {
+    box-shadow: 21px 28px 45px -25px rgba(0,0,0,0.57);
+}
+.collapse.navbar-collapse.navbarr {
+    margin: 25% 0 0 0;
+}
+.navbar-vertical .navbar-nav .nav-link > i {
+    font-size: 1.5375rem;
+    line-height: 2rem;
+    min-width: 3rem;
+}
+
+
+
+
+
+.searc {
+    text-align: right;
+}
+
+#navbar-search-main .form-group.mb-0 {
+    display: inline-table;
+}
+
+.form-group.mb-0 .input-group.input-group-alternative.input-group-merge {
+    max-width: 200px
+}
+.btn.btn-sm.btn-neutral {
+    font-size: 14px;
+}
+.input-group.input-group-alternative.input-group-merge input {
+    text-align: center
+}
+
+

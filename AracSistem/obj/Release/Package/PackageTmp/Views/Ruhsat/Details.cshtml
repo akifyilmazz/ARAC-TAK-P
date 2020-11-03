@@ -1,0 +1,43 @@
+﻿@model AracSistem.Models.Ruhsat
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ruhsat</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Musteri.Musteri_AdSoyad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Musteri.Musteri_AdSoyad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ruhsat_EklenmeTarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ruhsat_EklenmeTarih)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ruhsat_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ruhsat_No)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Ruhsat_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

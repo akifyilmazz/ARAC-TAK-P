@@ -1,0 +1,426 @@
+﻿@using AracSistem.ViewModels
+@model FaturaCreat
+
+@{
+    ViewBag.Title = "addInvoices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int j = 0;
+}
+
+
+@section HeaderCss{
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+    <link href="~/Content/css/Home/invoices/addInvoices/addInvoices.css" rel="stylesheet" />
+    <style>
+        .btn {
+            border-radius: 30px !important;
+        }
+
+        .card-body {
+            padding: 0 3% 0 3% !important;
+        }
+
+        .stokTable tbody tr {
+            margin-right: 10px
+        }
+
+        #StokBul {
+            margin-top: 3%
+        }
+
+        .stokModalBody {
+            overflow-y: scroll;
+            max-height: 500px
+        }
+
+        .stokModaltBody tr td input {
+            border: none;
+            text-align: center
+        }
+
+        .modal-dialog {
+            max-width: 50% !important;
+            margin: 1.75rem auto;
+        }
+
+        .modal-content {
+            width: 110% !important;
+        }
+
+        .stokModalBody thead tr th {
+            text-align: center
+        }
+       .tableGizle{
+           display:none
+       }
+       .tableGoster{
+           display:block
+       }
+        .card-body.detay {
+            box-shadow: 1px 3px 14px 0px rgb(218 217 217 / 75%)
+        }
+
+        card-body.detay .row .col-md-3, card-body.detay .row .col-md-3 {
+            text-align: center
+        }
+        .card-body .detay .row {
+            padding: 5% 5% 5% 5%;
+        }
+    </style>
+}
+
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Invocies")">Faturalar</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Creat","Invocies")">Fatura Ekle</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Satış</li>
+                            </ol>
+                        </nav>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-0" style="">Satış</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Card header -->
+                    <!-- card body -->
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Müşteri Ad</label>
+                                                <input type="text" id="input-musteriAd" class="form-control" value="@Model.Musteris.Musteri_AdSoyad">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Telefon</label>
+                                                <input type="text" id="input-telefon" class="form-control" value="@Model.Musteris.Musteri_Telefon">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Mail</label>
+                                                <input type="email" id="input-mail" class="form-control" value="@Model.Musteris.Musteri_Mail">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-tel">Cep telefonu</label>
+                                                <input type="email" id="input-cepTel" class="form-control" value="@Model.Musteris.Musteri_CepTelefon">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-tel">Adres</label>
+                                                <textarea rows="6" id="input-adres" class="form-control" value="@Model.Musteris.Musteri_Adres"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Fatura Tarihi</label>
+                                                <input type="date" id="input-faturaTarih" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Fatura Açıklaması</label>
+                                                <input type="text" id="input-faturaAciklama" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Ödeme Şekli</label>
+                                                <select class="form-control" name="kategori" id="input-odemeSekli">
+                                                    <option>Seçim YaP</option>
+                                                    @foreach (var item in Model.OdemeSeklis)
+                                                    {
+                                                        <option value="@item.OdemeSekli_Id">@item.OdemeSekli_Ad</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">İşlem Türü</label>
+                                                <select class="form-control" name="birim" id="input-İslemTur">
+                                                    <option>Seçim YaP</option>
+                                                    @foreach (var item in Model.IslemTurs)
+                                                    {
+                                                        <option value="@item.IslemTur_Id">@item.IslemTur_Ad</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-username">Müşteri Aracı</label>
+                                                <select class="form-control" name="birim" id="input-aracId">
+                                                    <option>Seçim YaP</option>
+                                                    @foreach (var item in Model.Aracs)
+                                                    {
+                                                        <option value="@item.Arac_Id">@item.Arac_Plaka</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-aracIslemKm">Araç Km</label>
+                                                <input type="text" id="input-aracIslemAracKm" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-aracIslemAciklama">Araç Açıklama</label>
+                                                <input type="text" id="input-aracIslemAciklama" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                        <br />
+                        <form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="stokTable tableGizle">
+                                        <tr>
+                                            <th><strong>Barkod</strong></th>
+                                            <th><strong>Stok Ad</strong></th>
+                                            <th><strong>Alış Fiyatı</strong></th>
+                                            <th><strong>Satış Fiyatı</strong></th>
+                                            <th><strong>Birim</strong></th>
+                                            <th><strong>Kategori</strong></th>
+                                        </tr>
+                                        <tbody id="stokBody"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-md-12" style="text-align:right">
+                            <button id="StokBul" type="button" class="btn btn-success" data-toggle="modal" data-target="#stokModal">Stok Bul</button>
+                        </div>
+                        <div class=" col-md-4">
+                            <div class="card card-stats">
+                                <!-- Card body -->
+                                <div class="card-body detay">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Toplam Fiyat</h5>
+                                            <input type="text" id="input-toplamFiyat" class="form-control" value="0" readonly/>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h5 class="card-title text-uppercase text-muted mb-0">Genel Toplam Fiyat</h5>
+                                            <input type="text" id="input-gToplamFiyat" class="form-control"value="0" readonly/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: card body -->
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                        <a href="javascript:;" onclick="FaturaKaydet()" class="btn btn-warning">Kaydet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*modal section*@
+<section>
+    @*Stok Modal*@
+    <div class="modal fade" id="stokModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="modal-title-default">Stok Seç</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="modal-body stokModalBody">
+
+                    <!-- Light table -->
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush modalStokTable">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="sort" data-sort="completion">#</th>
+                                    <th scope="col" class="sort" data-sort="name">Barkod</th>
+                                    <th scope="col" class="sort" data-sort="budget">Stok Ad</th>
+                                    <th scope="col" class="sort" data-sort="status">Alış Fiyat</th>
+                                    <th scope="col" class="sort" data-sort="status">Satış Fiyat</th>
+                                    <th scope="col" class="sort" data-sort="status"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="list ayrinti stokModaltBody">
+
+                                @foreach (var item in Model.Stoks)
+                                {
+                                    j++;
+                                    <tr>
+                                        <td scope="row">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm">@j</span>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td scope="row">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <input id="input-Stok_Barkod_@j" value="@item.Stok_Barkod" readonly style="border:none" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="budget">
+                                            <input id="input-Stok_Ad_@j" value="@item.Stok_Ad" readonly />
+                                        </td>
+                                        <td class="budget">
+                                            <input id="input-Stok_AlisFiyat_@j" value="@item.Stok_AlisFiyat" readonly />
+                                        </td>
+                                        <td class="budget">
+                                            <input id="input-Stok_SatisFiyat_@j" value="@item.Stok_SatisFiyat" readonly />
+                                        <td class="text-center">
+                                            <button onClick="stokEkle(@item.Stok_Id)" class="btn btn-info" data-dismiss="modal">Seç</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    @*end: Stok Modal*@
+</section>
+
+@section faturaEkle{
+    <script>
+        var NewInvociesSales = {
+            "Fatura": [],
+            "Arac_Islems": [],
+            "Musteri": [],
+            "Stoks": [],
+        }
+    </script>
+    <script>
+        function stokEkle(item) {
+            $(".stokTable").removeClass("tableGizle");
+            $(".stokTable").addClass("tableGoster");
+
+            console.log(item);
+            $.ajax({
+                url: '/Invocies/test/',
+                type: 'POST',
+                data: { a: item },
+                dataType: 'html',
+                success: function (data) {
+                    $("#stokBody").append(data);
+                    var StokNesnem = {
+                        "stok_Id": $("#stokBody tr td .stokId").val(),
+                        "Stok_Ad": $("#stokBody tr td .stokAd").val(),
+                        "Stok_Barkod": $("#stokBody tr td .barkodAd").val(),
+                        "Stok_AlisFiyat": $("#stokBody tr td .stokAlisFiyat").val(),
+                        "Stok_SatisFiyat": $("#stokBody tr td .stokSatisFiyat").val(),
+                        "Birim_Id": $("#stokBody tr td .birimId").val(),
+                        "Kategori_Id": $("#stokBody tr td .kategoriId").val(),
+                    }
+                    NewInvociesSales.Stoks.push(StokNesnem);    
+
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+
+        var i;
+        var adet = 0;
+        var stokBilg = new Array();
+        var musteriBilg
+        function FaturaKaydet() {
+            var faturaNesnem = {
+                "IslemTur_Id": $('#input-İslemTur').val(),
+                "OdemeSekli_Id": $('#input-odemeSekli').val(),
+                "Fatura_Tarih": $('#input-faturaTarih').val(),
+                "Fatura_Aciklama": $('#input-faturaAciklama').val(),
+                "Fatura_Tutar": 0,
+            }
+            NewInvociesSales.Fatura.push(faturaNesnem);
+            var aracIslemNesnem = {
+                "Arac_Id": $("#input-aracId").val(),
+                "AracIslem_Km": $("#input-aracIslemAracKm").val(),
+                "AracIslem_Aciklama": $("#input-aracIslemAciklama").val(),
+            }
+            NewInvociesSales.Arac_Islems.push(aracIslemNesnem);
+            var musteriNesnem = {
+                "Musteri_AdSoyad": $('#input-musteriAd').val(),
+                "Musteri_Telefon": $('#input-telefon').val(),
+                "Musteri_Mail": $('#input-mail').val(),
+                "Musteri_CepTelefon": $('#input-cepTel').val(),
+                "Musteri_Adres": $('#input-adres').val(),
+            }
+            NewInvociesSales.Musteri.push(musteriNesnem);
+
+            $.ajax({
+                url: '/Invocies/NewInvoiceSales/',
+                type: 'POST',
+                data: NewInvociesSales,
+                dataType: 'json',
+                success: function (data) {
+                    toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                    setTimeout(function () {
+                        window.location = "/Invocies/Index"
+                    }, 250)
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+    </script>
+}

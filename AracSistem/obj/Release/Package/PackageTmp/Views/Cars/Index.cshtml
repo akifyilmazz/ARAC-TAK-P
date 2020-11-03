@@ -1,0 +1,154 @@
+﻿@model AracSistem.ViewModels.ViewResult<AracSistem.Models.Arac>
+@{
+    ViewBag.Title = "Cars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int j = 0;
+}
+@section HeaderCss{
+    <link href="~/Content/css/Home/Cars/Cars.css" rel="stylesheet" />
+    <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
+}
+<section>
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4">
+                    <div class="col-lg-6 col-7">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Araçlar</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <div class="col-lg-6 col-5 text-right">
+                        <a href="@Url.Action("Create","Cars")" class="btn btn-success">Araç Ekle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container-fluid mt--6">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <!-- Card header -->
+                    <div class="card-header border-0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2 class="mb-0" style="text-align:left;font-weight:bold">Araçlar</h2>
+                            </div>
+                            <div class="col-md-6 searc">
+                                <form class="navbar-search navbar-search-light mr-sm-3" id="navbar-search-main">
+                                    <div class="form-group mb-0">
+                                        <div class="input-group input-group-alternative input-group-merge">
+
+                                            <input class="form-control" placeholder="Plaka Ara *" type="text">
+                                            <div class="input-group-prepend">
+                                                <a href="#" class="input-group-text"><i class="fas fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: Card header -->
+                    <!-- Light table -->
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush" style="text-align:center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="sort" data-sort="completion">#</th>
+                                    <th scope="col" class="sort" data-sort="name">Plaka</th>
+                                    <th scope="col" class="sort" data-sort="budget">Şase</th>
+                                    <th scope="col" class="sort" data-sort="budget"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="list ayrinti">
+                                @foreach (var item in Model.Veri)
+                                {
+                                    j++;
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm">@j</span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="budget">
+                                            @item.Arac_Plaka
+                                        </td>
+                                        <td class="budget">
+                                            @item.Arac_Sase
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="@Url.Action("Details", "Cars", new { id = item.Arac_Id })" role="button" aria-haspopup="true" aria-expanded="false">
+                                                <i class="far fa-edit fa-lg"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                        <nav aria-label="...">
+                            <ul class="pagination justify-content-end mb-0">
+                                <li class="page-item">
+                                    @if (Model.aktifSayfa == 1)
+                                    {
+                                        <a onclick="@Url.Action("Index","Stok")" class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        if (Model.aktifSayfa > 0)
+                                        {
+                                            <a onclick="@Url.Action("Index","Cars",new { sayfa=Model.aktifSayfa-1})" class="page-link" href="javascript:void(0)" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        }
+                                    }
+                                </li>
+                                @for (int i = 0; i < Math.Ceiling(decimal.Parse(Convert.ToDecimal(Model.toplamKayit / 10).ToString())); i++)
+                                {
+
+                                    if (i == 0)
+                                    {
+                                        <li class="page-item @(Model.aktifSayfa == i ? "active":"")"><a href="@Url.Action("Index","Cars")" class="page-link">@(i + 1)</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="page-item @(Model.aktifSayfa == i ? "active":"")"><a href="@Url.Action("Index","Cars",new { sayfa=i})" class="page-link">@(i + 1)</a></li>
+                                    }
+                                }
+                                @if (Math.Ceiling(decimal.Parse(Convert.ToDecimal(Model.toplamKayit / 10).ToString())) > Model.aktifSayfa + 1)
+                                {
+                                    <li class="page-item">
+                                        <a onclick="@Url.Action("Index","Cars",new { sayfa=Model.aktifSayfa+1})" class="page-link" href="javascript:void(0)" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- end: Card footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
