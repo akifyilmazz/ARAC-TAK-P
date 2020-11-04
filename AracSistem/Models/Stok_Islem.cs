@@ -19,6 +19,10 @@ namespace AracSistem.Models
 
         public DateTime? StokIslem_Tarih { get; set; }
 
+        public int? Fatura_Id { get; set; }
+
+        public virtual Fatura Fatura { get; set; }
+
         public virtual IslemTur IslemTur { get; set; }
 
         public virtual Stok Stok { get; set; }

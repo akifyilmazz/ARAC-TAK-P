@@ -203,7 +203,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h2 class="mb-0" style="text-align:left;font-weight:bold">Fatura İşlem</h2>
+                        <h2 class="mb-0" style="text-align:left;font-weight:bold">Stok İşlem</h2>
                     </div>
                     <!--end: Card header -->
                     <!-- Light table -->
@@ -215,17 +215,20 @@
                                     <th scope="col" class="sort" data-sort="completion">Stok Ad</th>
                                     <th scope="col" class="sort" data-sort="completion">Miktar</th>
                                     <th scope="col" class="sort" data-sort="completion">İşlem Tarihi</th>
+                                    <th scope="col" class="sort" data-sort="completion">İşlem Türü</th>
+                                    <th scope="col" class="sort" data-sort="completion">Birim Satış Fiyatı</th>
                                 </tr>
                             </thead>
                             <tbody class="list ayrinti">
-                                @foreach (var item in Model.IslemTur.Stok_Islem)
+                                @foreach (var item in Model.Stok_Islem)
                                 {
+                                    i++;
                                 <tr>
                                     <th scope="row">
                                         <div class="media align-items-center">
 
                                             <div class="media-body">
-                                                <span class="name mb-0 text-sm">@(i + 1)</span>
+                                                <span class="name mb-0 text-sm">@i</span>
                                             </div>
                                         </div>
                                     </th>
@@ -237,6 +240,12 @@
                                     </td>
                                     <td class="budget">
                                         <span>@item.StokIslem_Tarih</span>
+                                    </td>
+                                    <td class="budget">
+                                        <span>@item.IslemTur.IslemTur_Ad</span>
+                                    </td>
+                                    <td class="budget">
+                                        <span>@item.Stok.Stok_SatisFiyat</span>
                                     </td>
                                 </tr>
                                 }

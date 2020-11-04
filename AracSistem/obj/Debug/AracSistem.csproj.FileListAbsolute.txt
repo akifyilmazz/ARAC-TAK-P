@@ -625,3 +625,4 @@ C:\Users\Mehmet Akif YILMAZ\Desktop\akif proje\akifproje\AracSistem\bin\ru\Micro
 C:\Users\Mehmet Akif YILMAZ\Desktop\akif proje\akifproje\AracSistem\bin\tr\Microsoft.Build.resources.dll
 C:\Users\Mehmet Akif YILMAZ\Desktop\akif proje\akifproje\AracSistem\bin\zh-Hans\Microsoft.Build.resources.dll
 C:\Users\Mehmet Akif YILMAZ\Desktop\akif proje\akifproje\AracSistem\bin\zh-Hant\Microsoft.Build.resources.dll
+C:\Users\Mehmet Akif YILMAZ\Desktop\akif proje\akifproje\AracSistem\obj\Debug\AracSistem.csprojAssemblyReference.cache

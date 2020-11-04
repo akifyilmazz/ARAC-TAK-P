@@ -10,7 +10,6 @@ namespace AracSistem.Models
         public DbModel()
             : base("name=DbModel")
         {
-            //this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Arac> Arac { get; set; }
@@ -26,7 +25,7 @@ namespace AracSistem.Models
         public virtual DbSet<Stok> Stok { get; set; }
         public virtual DbSet<Stok_Islem> Stok_Islem { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<User> User{ get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -157,6 +156,23 @@ namespace AracSistem.Models
                 .HasMany(e => e.Stok_Islem)
                 .WithRequired(e => e.Stok)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.User_Mail)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.User_UserAd)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.User_telefon)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.User_Sifre)
+                .IsUnicode(false);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace AracSistem.Models
+namespace AracSistem.Models
 {
     using System;
     using System.Collections.Generic;
@@ -22,7 +22,6 @@
         public string User_telefon { get; set; }
 
         [StringLength(100)]
-        public string User_Sifre{ get; set; }
-
+        public string User_Sifre { get; set; }
     }
 }

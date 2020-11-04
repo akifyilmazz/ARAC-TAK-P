@@ -1,0 +1,21 @@
+﻿@using AracSistem.ViewModels
+@model stokEklePartialView
+@{
+    ViewBag.Title = "stokEklePartialView";
+}
+<tr id="@Model.RandSay">
+
+    <td><input type='text' id="input-barkod_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_Barkod" class='form-control barkodAd' /></td>
+    <td><input type='text' id="input-Ad_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_Ad" class='form-control stokAd' /></td>
+    <td><input type='text' id="input-alisFiyat_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_AlisFiyat" class='form-control stokAlisFiyat' /></td>
+    <td><input type='text' id="input-satisFiyat_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_SatisFiyat" class='form-control stokSatisFiyat' /></td>
+    <td><input type='text' id="input-birim_@Model.Stoks.Stok_Id" value="@Model.Stoks.Birim.Birim_Ad" class='form-control birimAd' /></td>
+    <td><input type='text' id="input-kategori_@Model.Stoks.Stok_Id" value="@Model.Stoks.Kategori.Kategori_Ad" class='form-control kategoriAd' /></td>
+    <td><input type='text' id="input-kategoriId_@Model.Stoks.Stok_Id" value="@Model.Stoks.Kategori_Id" class='form-control kategoriId' style="display:none" /></td>
+    <td><input type='text' id="input-birimId_@Model.Stoks.Stok_Id" value="@Model.Stoks.Birim_Id" class='form-control birimId' style="display:none" /></td>
+    <td><input type='text' id="input-stokId_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_Id" class='form-control stokId' style="display:none" /></td>
+
+
+    <td><a style="font-size:35px" href="javascript:;" onclick="StokSil(@Model.RandSay)" href="#"><i class="ni ni-fat-remove fa-lg"></i></a></td>
+
+</tr>

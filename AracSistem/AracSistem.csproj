@@ -195,9 +195,11 @@
     <Compile Include="ViewModels\CustomerDetails.cs" />
     <Compile Include="ViewModels\FaturaCreat.cs" />
     <Compile Include="ViewModels\HomeIndex.cs" />
+    <Compile Include="ViewModels\InvociesEdit.cs" />
     <Compile Include="ViewModels\NewInvociesSales.cs" />
     <Compile Include="ViewModels\RuhsatCreat.cs" />
     <Compile Include="ViewModels\StokCreate.cs" />
+    <Compile Include="ViewModels\stokEklePartialView.cs" />
     <Compile Include="ViewModels\ViewResult.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3252,6 +3254,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -3314,7 +3317,7 @@
     <Content Include="Views\Ruhsat\Edit.cshtml" />
     <Content Include="Views\Ruhsat\Index.cshtml" />
     <Content Include="Views\Invocies\newInvoiceSales.cshtml" />
-    <Content Include="Views\Invocies\Test.cshtml" />
+    <Content Include="Views\Invocies\stokEklePartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

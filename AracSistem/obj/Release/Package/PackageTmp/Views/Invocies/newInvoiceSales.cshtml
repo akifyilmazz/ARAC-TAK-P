@@ -123,6 +123,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Telefon</label>
                                                 <input type="text" id="input-telefon" class="form-control" value="@Model.Musteris.Musteri_Telefon">
+                                                <input type="text" id="input-musId" class="form-control" value="@Model.Musteris.Musteri_Id" style="display:none">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -163,7 +164,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Ödeme Şekli</label>
                                                 <select class="form-control" name="kategori" id="input-odemeSekli">
-                                                    <option>Seçim YaP</option>
+                                                    <option>Seçim Yap</option>
                                                     @foreach (var item in Model.OdemeSeklis)
                                                     {
                                                         <option value="@item.OdemeSekli_Id">@item.OdemeSekli_Ad</option>
@@ -175,7 +176,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">İşlem Türü</label>
                                                 <select class="form-control" name="birim" id="input-İslemTur">
-                                                    <option>Seçim YaP</option>
+                                                    <option>Seçim p</option>
                                                     @foreach (var item in Model.IslemTurs)
                                                     {
                                                         <option value="@item.IslemTur_Id">@item.IslemTur_Ad</option>
@@ -222,6 +223,7 @@
                                             <th><strong>Satış Fiyatı</strong></th>
                                             <th><strong>Birim</strong></th>
                                             <th><strong>Kategori</strong></th>
+                                            <th><strong>#</strong></th>
                                         </tr>
                                         <tbody id="stokBody"></tbody>
                                     </table>
@@ -238,7 +240,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Toplam Fiyat</h5>
-                                            <input type="text" id="input-toplamFiyat" class="form-control" value="0" readonly/>
+                                          <input type="text" id="input-toplamFiyat" class="form-control" value="0" readonly/>
                                         </div>
                                         <div class="col-md-6">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Genel Toplam Fiyat</h5>
@@ -318,7 +320,7 @@
                                         <td class="budget">
                                             <input id="input-Stok_SatisFiyat_@j" value="@item.Stok_SatisFiyat" readonly />
                                         <td class="text-center">
-                                            <button onClick="stokEkle(@item.Stok_Id)" class="btn btn-info" data-dismiss="modal">Seç</button>
+                                            <button onClick="stokEkle(@item.Stok_Id,@item.Stok_SatisFiyat)" class="btn btn-info" data-dismiss="modal">Seç</button>
                                         </td>
                                     </tr>
                                 }
@@ -344,26 +346,40 @@
         }
     </script>
     <script>
-        function stokEkle(item) {
+        function StokSil(item) {
+            var silinenStokDeger = parseFloat(document.getElementById('input-satisFiyat_' + item).value);
+            $("#" + item).remove();
+            document.getElementById('input-toplamFiyat').value = parseFloat($("#input-toplamFiyat").val()) - silinenStokDeger;
+        }
+    </script>
+    <script>
+        function stokEkle(item,satisFiyat) {
             $(".stokTable").removeClass("tableGizle");
             $(".stokTable").addClass("tableGoster");
+            var eklenenStokDeger = parseFloat(document.getElementById('input-toplamFiyat').value);
+            ToplamArttir();
 
-            console.log(item);
+            //toplam fat fiyatı arttır
+            function ToplamArttir() {
+                document.getElementById('input-toplamFiyat').value = eklenenStokDeger + satisFiyat;
+            }
+
+
             $.ajax({
-                url: '/Invocies/test/',
+                url: '/Invocies/stokEklePartialView/',
                 type: 'POST',
                 data: { a: item },
                 dataType: 'html',
                 success: function (data) {
                     $("#stokBody").append(data);
                     var StokNesnem = {
-                        "stok_Id": $("#stokBody tr td .stokId").val(),
-                        "Stok_Ad": $("#stokBody tr td .stokAd").val(),
-                        "Stok_Barkod": $("#stokBody tr td .barkodAd").val(),
-                        "Stok_AlisFiyat": $("#stokBody tr td .stokAlisFiyat").val(),
-                        "Stok_SatisFiyat": $("#stokBody tr td .stokSatisFiyat").val(),
-                        "Birim_Id": $("#stokBody tr td .birimId").val(),
-                        "Kategori_Id": $("#stokBody tr td .kategoriId").val(),
+                        "stok_Id": $("#stokBody tr td #input-stokId_" + item).val(),
+                        "Stok_Ad": $("#stokBody tr td #input-Ad_" + item).val(),
+                        "Stok_Barkod": $("#stokBody tr td #input-barkod_" + item).val(),
+                        "Stok_AlisFiyat": $("#stokBody tr td #input-alisFiyat_" + item).val(),
+                        "Stok_SatisFiyat": $("#stokBody tr td #input-satisFiyat_" + item).val(),
+                        "Birim_Id": $("#stokBody tr td #input-birimId_" + item).val(),
+                        "Kategori_Id": $("#stokBody tr td #input-kategoriId_" + item).val(),
                     }
                     NewInvociesSales.Stoks.push(StokNesnem);    
 
@@ -386,7 +402,7 @@
                 "OdemeSekli_Id": $('#input-odemeSekli').val(),
                 "Fatura_Tarih": $('#input-faturaTarih').val(),
                 "Fatura_Aciklama": $('#input-faturaAciklama').val(),
-                "Fatura_Tutar": 0,
+                "Fatura_Tutar": $('#input-toplamFiyat').val(),
             }
             NewInvociesSales.Fatura.push(faturaNesnem);
             var aracIslemNesnem = {
@@ -401,6 +417,7 @@
                 "Musteri_Mail": $('#input-mail').val(),
                 "Musteri_CepTelefon": $('#input-cepTel').val(),
                 "Musteri_Adres": $('#input-adres').val(),
+                "Musteri_Id": $("#input-musId").val(),
             }
             NewInvociesSales.Musteri.push(musteriNesnem);
 

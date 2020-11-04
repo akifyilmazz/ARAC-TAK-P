@@ -16,6 +16,6 @@ namespace AracSistem.ViewModels
 
         public List<Stok> Stoks { get; set; }
         
-
+        public Musteri_Islem Musteri_Islems { get; set; }
     }
 }
