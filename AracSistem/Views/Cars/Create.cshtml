@@ -25,7 +25,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="aracEkle()" class="btn btn-success">Kaydet</a>
+                        <a href="javascript:;" onclick="kontrol()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -56,6 +56,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">Ruhsat</label>
                                             <select class="form-control" name="ruhsatId" id="input-ruhsatId">
+                                                <option>Seçim Yap</option>
                                                 @foreach (var item in Model.Ruhsats)
                                                 {
                                                     <option value="@item.Ruhsat_Id">@item.Ruhsat_No</option>
@@ -118,6 +119,26 @@
                 }
             });
         }
-
+        function kontrol() {
+            var hata = "";
+            var Ruhsat_Id = $("#input-ruhsatId").val();
+            var Arac_Plaka = $("#input-plaka").val();
+            var Arac_Sase = $("#input-sase").val();
+            if (Ruhsat_Id == "Seçim Yap") {
+                hata = "Lütfen ruhsat giriniz"
+            }
+            else if (Arac_Plaka == "") {
+                hata = "Lütfen Plaka giriniz";
+            }
+            else if (Arac_Sase == "") {
+                hata = "Lütfen şase giriniz";
+            }
+            if (hata != "") {
+                toastr.success(hata);
+            } else {
+                aracEkle();
+            }
+        }
     </script>
+
 }

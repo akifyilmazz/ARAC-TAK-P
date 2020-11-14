@@ -69,10 +69,22 @@
                                     <span class="nav-link-text">Kategori</span>
                                 </a>
                             </li>
-                             <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link " href="@Url.Action("Index","Ruhsat")">
                                     <i class="ni ni-vector"></i>
                                     <span class="nav-link-text">Ruhsat</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="@Url.Action("Index","OdemeSeklis")">
+                                    <i class="ni ni-vector"></i>
+                                    <span class="nav-link-text">Ödeme Şekli</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="@Url.Action("Index","IslemTurs")">
+                                    <i class="ni ni-vector"></i>
+                                    <span class="nav-link-text">İşlem Tür</span>
                                 </a>
                             </li>
                         </ul>
@@ -171,6 +183,9 @@
     @RenderSection("stokEkle", required: false)
     @RenderSection("faturaEkle", required: false)
     @RenderSection("faturaDüzenle", required: false)
+    @RenderSection("CreateOdemeSekli", required: false)
+    @RenderSection("CreateIslemTur", required: false)
+    @RenderSection("EditBirim", required: false)
     
 </body>
 </html>

@@ -6,9 +6,11 @@ using System.Web;
 
 namespace AracSistem.ViewModels
 {
-    public class stokEklePartialView
+    public class RuhsaEdit
     {
-        public Stok Stoks { get; set; }
-        public int RandSay { get; set; }
+        public Ruhsat Ruhsats { get; set; }
+
+        public List<Musteri> Musteris { get; set; }
+
     }
 }

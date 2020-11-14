@@ -1,4 +1,5 @@
-﻿@model AracSistem.Models.Fatura
+﻿@using AracSistem.ViewModels
+@model InvcociesDetail
 @{
     ViewBag.Title = "invocesDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,7 +28,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="@Url.Action("Edit","Invocies", new { Fatura_Id= Model.Fatura_Id})" class="btn btn-success">Düzenle</a>
+                        <a href="@Url.Action("Edit","Invocies", new { Fatura_Id= Model.Faturas.Fatura_Id})" class="btn btn-success">Düzenle</a>
                     </div>
                 </div>
             </div>
@@ -42,7 +43,7 @@
                 <div class="card">
                     <!-- Card header -->
                     <div class="card-header border-0">
-                        <h2 class="mb-0" style="text-align:left;font-weight:bold">@Model.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_AdSoyad</h2>
+                        <h2 class="mb-0" style="text-align:left;font-weight:bold">@Model.Faturas.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_AdSoyad</h2>
                     </div>
                     <!--end: Card header -->
 
@@ -73,26 +74,26 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Fatura Tarihi </h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Fatura_Tarih</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Fatura_Tarih</span>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Tutar</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Fatura_Tutar₺</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Fatura_Tutar₺</span>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">İŞLEM TİPİ</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.IslemTur.IslemTur_Tip</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.IslemTur.IslemTur_Tip</span>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">İŞLEM ADI</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.IslemTur.IslemTur_Ad</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.IslemTur.IslemTur_Ad</span>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Açıklama</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            @Model.Fatura_Aciklama
+                                                            @Model.Faturas.Fatura_Aciklama
                                                         </span>
                                                     </div>
                                                 </div>
@@ -108,22 +109,22 @@
                                                 <div class="row">
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Plaka  </h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Arac_Plaka </span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Arac_Plaka </span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">RUHSAT TARİHİ</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Ruhsat.Ruhsat_EklenmeTarih</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Ruhsat.Ruhsat_EklenmeTarih</span>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">RUHSAT</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Ruhsat.Ruhsat_No</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Ruhsat.Ruhsat_No</span>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Açıklama</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            @Model.Arac_Islem.AracIslem_Aciklama
+                                                            @Model.Faturas.Arac_Islem.AracIslem_Aciklama
                                                         </span>
                                                     </div>
                                                 </div>
@@ -139,30 +140,30 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Ad Ve Soyad  </h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_AdSoyad</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_AdSoyad</span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Telefon</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_Telefon</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_Telefon</span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Plaka</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Arac_Plaka</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Arac_Plaka</span>
                                                     </div>
                                                 </div>
                                                 <div class="row bosluk">
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Adres</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_Adres</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_Adres</span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Cep Telefonu</h5>
-                                                        <span class="h2 font-weight-bold mb-0">@Model.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_CepTelefon</span>
+                                                        <span class="h2 font-weight-bold mb-0">@Model.Faturas.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_CepTelefon</span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Mail</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                            @Model.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_Mail
+                                                            @Model.Faturas.Arac_Islem.Arac.Ruhsat.Musteri.Musteri_Mail
                                                         </span>
                                                     </div>
                                                 </div>
@@ -179,7 +180,7 @@
                                                     <div class="">
                                                         <h5 class="card-title text-uppercase text-muted mb-0">Ödeme Şekli</h5>
                                                         <span class="h2 font-weight-bold mb-0">
-                                                          @Model.OdemeSekli.OdemeSekli_Ad
+                                                            @Model.Faturas.OdemeSekli.OdemeSekli_Ad
                                                         </span>
                                                     </div>
                                                 </div>
@@ -193,7 +194,7 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 </section>
 <hr />
 <section>
@@ -220,34 +221,35 @@
                                 </tr>
                             </thead>
                             <tbody class="list ayrinti">
-                                @foreach (var item in Model.Stok_Islem)
+                                @foreach (var item in Model.Stok_Islems)
                                 {
-                                    i++;
-                                <tr>
-                                    <th scope="row">
-                                        <div class="media align-items-center">
 
-                                            <div class="media-body">
-                                                <span class="name mb-0 text-sm">@i</span>
+                                    i++;
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm">@i</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </th>
-                                    <td class="budget">
-                                        <span class="name mb-0 text-sm cssBold">@item.Stok.Stok_Ad</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>@item.StokIslem_Miktar</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>@item.StokIslem_Tarih</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>@item.IslemTur.IslemTur_Ad</span>
-                                    </td>
-                                    <td class="budget">
-                                        <span>@item.Stok.Stok_SatisFiyat</span>
-                                    </td>
-                                </tr>
+                                        </th>
+                                        <td class="budget">
+                                            <span class="name mb-0 text-sm cssBold">@item.Stok.Stok_Ad</span>
+                                        </td>
+                                        <td class="budget">
+                                            <span>@item.StokIslem_Miktar</span>
+                                        </td>
+                                        <td class="budget">
+                                            <span>@item.StokIslem_Tarih</span>
+                                        </td>
+                                        <td class="budget">
+                                            <span>@item.IslemTur.IslemTur_Ad</span>
+                                        </td>
+                                        <td class="budget">
+                                            <span>@item.StokIslem_Tutar</span>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

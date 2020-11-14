@@ -21,6 +21,9 @@ namespace AracSistem.Models
 
         public int? Fatura_Id { get; set; }
 
+        [Column(TypeName = "money")]
+        public decimal? StokIslem_Tutar { get; set; }
+
         public virtual Fatura Fatura { get; set; }
 
         public virtual IslemTur IslemTur { get; set; }

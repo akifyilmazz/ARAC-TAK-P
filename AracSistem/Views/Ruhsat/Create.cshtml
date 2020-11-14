@@ -26,7 +26,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="RuhsatEkle()" class="btn btn-success">Kaydet</a>
+                        <a href="javascript:;" onclick="kontrol()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -57,6 +57,7 @@
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">Müşteri</label>
                                             <select class="form-control" name="müsteriId" id="input-müsteriId">
+                                                <option>Seçim Yap</option>
                                                 @foreach (var item in Model.Musteris)
                                                 {
                                                     <option value="@item.Musteri_Id">@item.Musteri_AdSoyad</option>
@@ -99,7 +100,6 @@
                 Ruhsat_EklenmeTarih: $('#input-ruhsatTarih').val(),
                 Ruhsat_No: $('#input-ruhsatNo').val(),
             }
-
             $.ajax({
                 url: '/Ruhsat/Create/',
                 type: 'POST',
@@ -120,7 +120,25 @@
                 }
             });
         }
+        function kontrol() {
+            var hata = "";
+            var Musteri_Id = $('#input-müsteriId').val();
+            var Ruhsat_EklenmeTarih = $('#input-ruhsatTarih').val();
+            var Ruhsat_No = $('#input-ruhsatNo').val();
+            if (Musteri_Id == "Seçim Yap") {
+                hata = "Lütfen Müşteri giriniz";
+            }
+            else if (Ruhsat_EklenmeTarih == "") {
+                hata = "Lütfen tarih giriniz";
+            }
+            else if (Ruhsat_No == "") {
+                hata = "Lütfen ruhsat giriniz";
+            }
+            if (hata != "") {
+                toastr.success(hata);
+            } else {
+                RuhsatEkle();
+            }
+        }
     </script>
 }
-
-

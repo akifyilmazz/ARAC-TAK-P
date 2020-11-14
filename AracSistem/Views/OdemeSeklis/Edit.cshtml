@@ -1,7 +1,6 @@
-﻿
-@model AracSistem.Models.Birim
+﻿@model AracSistem.Models.OdemeSekli
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "OdemeSeklis";
 }
 @section HeaderCss{
     <link href="~/Content/css/Home/Cars/addCars/addCars.css" rel="stylesheet" />
@@ -18,8 +17,8 @@
                             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Birim")">Birim</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Birim Düzenle</li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","OdemeSeklis")">Odeme Şekli</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Ödeme Şekli Düzenle</li>
                             </ol>
                         </nav>
                     </div>
@@ -42,7 +41,7 @@
                     <div class="card-header border-0">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2 class="mb-0" style="">Birim Düzenle</h2>
+                                <h2 class="mb-0" style="">Ödeme Şekli Düzenle</h2>
                             </div>
                         </div>
                     </div>
@@ -54,9 +53,9 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-username">Birim Ad</label>
-                                            <input type="text" id="input-birim" class="form-control" placeholder="Birim giriniz  *" value="@Model.Birim_Ad">
-                                            <input style="display:none" type="text" id="input-birimId" class="form-control" value="@Model.Birim_Id">
+                                            <label class="form-control-label" for="input-username">Ödeme Şekli Ad</label>
+                                            <input type="text" id="input-OdemeSekli" class="form-control" placeholder="Birim giriniz  *" value="@Model.OdemeSekli_Ad">
+                                            <input style="display:none" type="text" id="input-odemeSekliId" class="form-control" value="@Model.OdemeSekli_Id">
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +85,7 @@
                     <p>Silmek İstediğine Emin misin ?</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" onclick="deleteBirim(@Model.Birim_Id)" data-dismiss="modal" class="btn btn-primary">Evet</a>
+                    <a href="javascript:;" onclick="deleteOdemeSekli(@Model.OdemeSekli_Id)" data-dismiss="modal" class="btn btn-primary">Evet</a>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -94,23 +93,23 @@
     </div>
 </section>
 
-@section CreateBirim{
+@section CreateOdemeSekli{
     <script>
         function editBirim() {
             data = {
-                Birim_Id: $('#input-birimId').val(),
-                Birim_Ad: $('#input-birim').val(),
+                OdemeSekli_Id: $('#input-odemeSekliId').val(),
+                OdemeSekli_Ad: $('#input-OdemeSekli').val(),
             }
             $.ajax({
-                url: '/Birim/Edit/',
+                url: '/OdemeSeklis/Edit/',
                 type: 'POST',
                 data: data,
                 dataType: 'json',
                 success: function (data) {
-                    if (data.Birim_Id > 0) {
+                    if (data.OdemeSekli_Id > 0) {
                         toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
                         setTimeout(function () {
-                            window.location = "/Birim"
+                            window.location = "/OdemeSeklis"
                         }, 250)
                     }
                 },
@@ -123,9 +122,9 @@
         }
     </script>
     <script>
-        function deleteBirim(id) {
+        function deleteOdemeSekli(id) {
             $.ajax({
-                url: '/Birim/Delete/',
+                url: '/OdemeSeklis/Delete/',
                 type: 'POST',
                 data: { "id": id },
                 dataType: 'json',
@@ -136,7 +135,7 @@
                     else {
                         toastr.success('Başarıyla Slindi Yönlendiriliyorsunuz');
                         setTimeout(function () {
-                            window.location = "../IslemTurs"
+                            window.location = "../OdemeSeklis"
                         }, 1500)
                     }
                 },

@@ -1,0 +1,35 @@
+﻿@model AracSistem.Models.IslemTur
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>IslemTur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IslemTur_Tip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IslemTur_Tip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IslemTur_Ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IslemTur_Ad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IslemTur_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

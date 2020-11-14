@@ -22,10 +22,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/24/2020 19:47:14</publishTime>
     </File>
     <File Include="bin/AracSistem.dll">
-      <publishTime>11/05/2020 01:47:43</publishTime>
+      <publishTime>11/13/2020 01:03:30</publishTime>
     </File>
     <File Include="bin/AracSistem.pdb">
-      <publishTime>11/05/2020 01:47:43</publishTime>
+      <publishTime>11/13/2020 01:03:30</publishTime>
     </File>
     <File Include="bin/cs/Microsoft.Build.resources.dll">
       <publishTime>10/20/2020 23:23:56</publishTime>
@@ -9580,19 +9580,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2020 15:26:23</publishTime>
     </File>
     <File Include="Views/Invocies/Details.cshtml">
-      <publishTime>11/05/2020 00:58:54</publishTime>
+      <publishTime>11/11/2020 21:20:52</publishTime>
     </File>
     <File Include="Views/Invocies/Edit.cshtml">
-      <publishTime>11/05/2020 01:44:39</publishTime>
+      <publishTime>11/13/2020 00:51:56</publishTime>
     </File>
     <File Include="Views/Invocies/Index.cshtml">
-      <publishTime>10/29/2020 15:26:23</publishTime>
+      <publishTime>11/13/2020 01:01:46</publishTime>
     </File>
     <File Include="Views/Invocies/newInvoiceSales.cshtml">
-      <publishTime>11/05/2020 01:21:15</publishTime>
+      <publishTime>11/12/2020 23:57:59</publishTime>
     </File>
     <File Include="Views/Invocies/stokEklePartialView.cshtml">
-      <publishTime>11/04/2020 23:36:05</publishTime>
+      <publishTime>11/11/2020 21:43:59</publishTime>
     </File>
     <File Include="Views/Kategori/Create.cshtml">
       <publishTime>11/03/2020 02:04:05</publishTime>
@@ -9604,7 +9604,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2020 15:26:23</publishTime>
     </File>
     <File Include="Views/Kategori/Edit.cshtml">
-      <publishTime>10/29/2020 15:26:23</publishTime>
+      <publishTime>08/11/2020 02:50:49</publishTime>
     </File>
     <File Include="Views/Kategori/Index.cshtml">
       <publishTime>10/29/2020 15:26:23</publishTime>
@@ -9613,7 +9613,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2020 15:26:23</publishTime>
     </File>
     <File Include="Views/Ruhsat/Create.cshtml">
-      <publishTime>11/04/2020 00:41:40</publishTime>
+      <publishTime>08/11/2020 02:42:43</publishTime>
     </File>
     <File Include="Views/Ruhsat/Delete.cshtml">
       <publishTime>10/29/2020 15:26:23</publishTime>
@@ -9622,7 +9622,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2020 15:26:23</publishTime>
     </File>
     <File Include="Views/Ruhsat/Edit.cshtml">
-      <publishTime>10/29/2020 15:26:23</publishTime>
+      <publishTime>11/13/2020 00:04:06</publishTime>
     </File>
     <File Include="Views/Ruhsat/Index.cshtml">
       <publishTime>10/29/2020 15:26:23</publishTime>
@@ -9640,7 +9640,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2020 15:26:23</publishTime>
     </File>
     <File Include="Views/Stok/Edit.cshtml">
-      <publishTime>10/29/2020 15:26:23</publishTime>
+      <publishTime>11/13/2020 00:37:30</publishTime>
     </File>
     <File Include="Views/Stok/Index.cshtml">
       <publishTime>10/29/2020 15:26:23</publishTime>
@@ -9652,7 +9652,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/29/2020 15:26:23</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/05/2020 01:47:50</publishTime>
+      <publishTime>11/13/2020 01:03:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

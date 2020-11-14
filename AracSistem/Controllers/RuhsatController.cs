@@ -18,7 +18,7 @@ namespace AracSistem.Controllers
         public ActionResult Index(int sayfa = 0)
         {
             int toplamKayit = db.Ruhsat.Count();
-            var ruhsat = db.Ruhsat.OrderBy(x => x.Ruhsat_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+            var ruhsat = db.Ruhsat.OrderByDescending(x => x.Ruhsat_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
 
             ViewResult<Ruhsat> ruhsatlar = new ViewResult<Ruhsat>()
             {
@@ -62,8 +62,10 @@ namespace AracSistem.Controllers
 
         public ActionResult Edit(int? Ruhsat_Id)
         {
-            var ruhsat = db.Ruhsat.Where(x => x.Ruhsat_Id == Ruhsat_Id).FirstOrDefault();
-            return View(ruhsat);
+            RuhsaEdit ruhsatEdit = new RuhsaEdit();
+            ruhsatEdit.Ruhsats = db.Ruhsat.Where(x => x.Ruhsat_Id == Ruhsat_Id).FirstOrDefault();
+            ruhsatEdit.Musteris = db.Musteri.ToList();
+            return View(ruhsatEdit);
         }
         [HttpPost]
         public JsonResult Edit(Ruhsat r)
@@ -76,17 +78,22 @@ namespace AracSistem.Controllers
             return Json(r);
         }
 
-        public ActionResult Delete(int? Ruhsat_Id)
+        [HttpPost]
+        public JsonResult Delete(int? id)
         {
-            if (Ruhsat_Id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            var hata = "";
+            var ruhsat = db.Ruhsat.Find(id);
 
-            var ruhsat = db.Ruhsat.Where(x => x.Ruhsat_Id == Ruhsat_Id).ToList();
-            db.Ruhsat.RemoveRange(ruhsat);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ruhsat.Arac.Count() == 0)
+            {
+                db.Ruhsat.Remove(ruhsat);
+                db.SaveChanges();
+            }
+            else
+            {
+                hata = "Buruhsata ait Araçların silinmesi gerekiyor !";
+            }
+            return Json(hata);
         }
 
         protected override void Dispose(bool disposing)

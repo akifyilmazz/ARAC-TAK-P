@@ -66,8 +66,11 @@ namespace AracSistem.Controllers
         [HttpGet]
         public ActionResult Edit(int? Stok_Id)
         {
-            var stok = db.Stok.Find(Stok_Id);
-            return View(stok);
+            StokEdit stokEdit = new StokEdit();
+            stokEdit.Stoks = db.Stok.Find(Stok_Id);
+            stokEdit.Kategoris = db.Kategori.ToList();
+            stokEdit.Birims = db.Birim.ToList(); 
+            return View(stokEdit);
         }
         [HttpPost]
         public JsonResult Edit(Stok s)
@@ -84,7 +87,22 @@ namespace AracSistem.Controllers
             db.SaveChanges();
             return Json(s);
         }
+        public JsonResult Delete(int? id)
+        {
+            var hata = "";
+            var stok = db.Stok.Find(id);
 
+            if (stok.Stok_Islem.Count() == 0)
+            {
+                db.Stok.Remove(stok);
+                db.SaveChanges();
+            }
+            else
+            {
+                hata = "Bu stoğa ait işlemlerin silinmesi gerekiyor !";
+            }
+            return Json(hata);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

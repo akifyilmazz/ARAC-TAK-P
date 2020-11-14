@@ -111,4 +111,30 @@
             });
         }
     </script>
+    <script>
+        function deleteBirim(id) {
+            $.ajax({
+                url: '/Cars/Delete/',
+                type: 'POST',
+                data: { "id": id },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        toastr.success(data);
+                    }
+                    else {
+                        toastr.success('Başarıyla Slindi Yönlendiriliyorsunuz');
+                        setTimeout(function () {
+                            window.location = "../Cars"
+                        }, 1500)
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+    </script>
 }

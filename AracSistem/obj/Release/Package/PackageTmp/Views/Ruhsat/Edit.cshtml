@@ -1,4 +1,5 @@
-﻿@model AracSistem.Models.Ruhsat
+﻿@using AracSistem.ViewModels
+@model RuhsaEdit
 @{
     ViewBag.Title = "Edit";
 }
@@ -52,21 +53,27 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="text" id="input-RuhsatId" class="form-control" value="@Model.Ruhsat_Id" style="display:none" />
+                                            <input type="text" id="input-RuhsatId" class="form-control" value="@Model.Ruhsats.Ruhsat_Id" style="display:none" />
                                             <label class="form-control-label" for="input-username">Müşteri</label>
-                                            <input type="text" id="input-MusteriId" class="form-control" value="@Model.Musteri.Musteri_AdSoyad">
+                                            <select class="form-control" name="musteriAd" id="input-MusteriId">
+                                                <option value="@Model.Musteris">@Model.Ruhsats.Musteri.Musteri_AdSoyad</option>
+                                                @foreach (var item in Model.Musteris)
+                                                {
+                                                    <option value="@item.Musteri_Id">@item.Musteri_AdSoyad</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Eklenme Tarihi</label>
-                                            <input type="datetime" id="input-RuhsatEklenmeTarih" class="form-control" value="@Model.Ruhsat_EklenmeTarih">
+                                            <input type="datetime" id="input-RuhsatEklenmeTarih" class="form-control" value="@Model.Ruhsats.Ruhsat_EklenmeTarih">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Ruhsat No</label>
-                                            <input type="text" id="input-RuhsatNo" class="form-control" value="@Model.Ruhsat_No">
+                                            <input type="text" id="input-RuhsatNo" class="form-control" value="@Model.Ruhsats.Ruhsat_No">
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +97,7 @@
         function RuhsatEdit() {
             data = {
                 Ruhsat_Id: $('#input-RuhsatId').val(),
-                Musteri_Id: 7,
+                Musteri_Id: $('#input-MusteriId option:selected').val(),
                 Ruhsat_EklenmeTarih: $('#input-RuhsatEklenmeTarih').val(),
                 Ruhsat_No: $('#input-RuhsatNo').val(),
             }

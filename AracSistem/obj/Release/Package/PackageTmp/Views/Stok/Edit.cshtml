@@ -1,4 +1,5 @@
-﻿@model AracSistem.Models.Stok
+﻿@using AracSistem.ViewModels
+@model StokEdit
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,15 +55,27 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input type="text" id="input-StokId" class="form-control" value="@Model.Stok_Id" style="display:none" />
+                                            <input type="text" id="input-StokId" class="form-control" value="@Model.Stoks.Stok_Id" style="display:none" />
                                             <label class="form-control-label" for="input-username">Kategori</label>
-                                            <input type="text" id="input-kategori" class="form-control" value="@Model.Kategori.Kategori_Ad">
+                                            <select class="form-control" name="kategoriAd" id="input-kategori">
+                                                <option value="@Model.Stoks.Kategori.Kategori_Ad">@Model.Stoks.Kategori.Kategori_Ad</option>
+                                                @foreach(var item in Model.Kategoris)
+                                                {
+                                                    <option value="@item.Kategori_Id">@item.Kategori_Ad</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Birim</label>
-                                            <input type="text" id="input-birim" class="form-control" value="@Model.Birim.Birim_Ad">
+                                            <select class="form-control" name="birimAd" id="input-birim">
+                                                <option value="@Model.Stoks.Birim.Birim_Id">@Model.Stoks.Birim.Birim_Ad</option>
+                                                @foreach (var item in Model.Birims)
+                                                {
+                                                    <option value="@item.Birim_Id">@item.Birim_Ad,</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -70,13 +83,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-username">BARKOD</label>
-                                            <input type="text" id="input-barkod" class="form-control" value="@Model.Stok_Barkod">
+                                            <input type="text" id="input-barkod" class="form-control" value="@Model.Stoks.Stok_Barkod">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">STOK AD</label>
-                                            <input type="text" id="input-stokAd" class="form-control" value="@Model.Stok_Ad">
+                                            <input type="text" id="input-stokAd" class="form-control" value="@Model.Stoks.Stok_Ad">
                                         </div>
                                     </div>
                                 </div>
@@ -84,13 +97,13 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-first-name">ALIŞ FIYAT	</label>
-                                            <input type="text" id="input-alisFiyat" class="form-control" value="@Model.Stok_AlisFiyat">
+                                            <input type="text" id="input-alisFiyat" class="form-control" value="@Model.Stoks.Stok_AlisFiyat">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-last-name">SATIŞ FIYAT	</label>
-                                            <input type="text" id="input-satisFiyat" class="form-control" value="@Model.Stok_SatisFiyat">
+                                            <input type="text" id="input-satisFiyat" class="form-control" value="@Model.Stoks.Stok_SatisFiyat">
                                         </div>
                                     </div>
                                 </div>
@@ -130,8 +143,8 @@
                 success: function (data) {
                     if (data.Stok_Id > 0) {
                         toastr.success('Başarıyla Güncellendi! Yönlendiriliyorsunuz');
-                         setTimeout(function () {
-                             window.location = "/Stok"
+                        setTimeout(function () {
+                            window.location = "/Stok"
                         }, 250)
                     }
                 },

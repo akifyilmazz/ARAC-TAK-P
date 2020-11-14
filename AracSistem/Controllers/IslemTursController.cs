@@ -11,38 +11,38 @@ using AracSistem.ViewModels;
 
 namespace AracSistem.Controllers
 {
-    public class BirimController : Controller
+    public class IslemTursController : Controller
     {
         private DbModel db = new DbModel();
 
-        // GET: Birim
+        // GET: IslemTur
         public ActionResult Index(int sayfa = 0)
         {
-            int toplamKayit = db.Birim.Count();
-            var birim = db.Birim.OrderBy(x => x.Birim_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+            int toplamKayit = db.IslemTur.Count();
+            var IslemTur = db.IslemTur.OrderBy(x => x.IslemTur_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
 
-            ViewResult<Birim> birimler = new ViewResult<Birim>()
+            ViewResult<IslemTur> IslemTurler = new ViewResult<IslemTur>()
             {
                 toplamKayit = toplamKayit,
-                Veri = birim,
+                Veri = IslemTur,
                 aktifSayfa = sayfa
             };
-            return View(birimler);
+            return View(IslemTurler);
         }
 
-        // GET: Birim/Details/5
+        // GET: IslemTur/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Birim birim = db.Birim.Find(id);
-            if (birim == null)
+            IslemTur IslemTur = db.IslemTur.Find(id);
+            if (IslemTur == null)
             {
                 return HttpNotFound();
             }
-            return View(birim);
+            return View(IslemTur);
         }
 
         public ActionResult Create()
@@ -51,42 +51,42 @@ namespace AracSistem.Controllers
         }
 
         [HttpPost]
-        public JsonResult Create(Birim birim)
+        public JsonResult Create(IslemTur IslemTur)
         {
-            db.Birim.Add(birim);
+            db.IslemTur.Add(IslemTur);
             db.SaveChanges();
 
-            return Json(birim);
+            return Json(IslemTur);
         }
         [HttpGet]
-        public ActionResult Edit(int? Birim_Id)
+        public ActionResult Edit(int? IslemTur_Id)
         {
-            var birim = db.Birim.Find(Birim_Id);
+            var IslemTur = db.IslemTur.Find(IslemTur_Id);
 
-            return View("Edit", birim);
+            return View("Edit", IslemTur);
         }
         [HttpPost]
-        public JsonResult Edit(Birim b)
+        public JsonResult Edit(IslemTur b)
         {
-            var birim = db.Birim.Find(b.Birim_Id);
-            birim.Birim_Ad = b.Birim_Ad;
+            var IslemTur = db.IslemTur.Find(b.IslemTur_Id);
+            IslemTur.IslemTur_Ad = b.IslemTur_Ad;
             db.SaveChanges();
             return Json(b);
         }
         [HttpPost]
-        public JsonResult Delete(int? id)
+        public JsonResult Delete(int? IslemTur_Id)
         {
             var hata = "";
-            var birim = db.Birim.Find(id);
+            var islemTur = db.IslemTur.Find(IslemTur_Id);
 
-            if (birim.Stok.Count() == 0)
+            if (islemTur.Fatura.Count() == 0)
             {
-                db.Birim.Remove(birim);
+                db.IslemTur.Remove(islemTur);
                 db.SaveChanges();
             }
             else
             {
-                hata = "Bu birimi kullanan Stoklar silinmesi gerekiyor !";
+                hata = "Bu işlem Tür ile kesilmiş faturalar silinmesi gerekiyor !";
             }
             return Json(hata);
         }

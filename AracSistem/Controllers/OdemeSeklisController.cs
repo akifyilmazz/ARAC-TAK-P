@@ -11,82 +11,79 @@ using AracSistem.ViewModels;
 
 namespace AracSistem.Controllers
 {
-    public class BirimController : Controller
+    public class OdemeSeklisController : Controller
     {
         private DbModel db = new DbModel();
 
-        // GET: Birim
+        // GET: odemeSekli
         public ActionResult Index(int sayfa = 0)
         {
-            int toplamKayit = db.Birim.Count();
-            var birim = db.Birim.OrderBy(x => x.Birim_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+            int toplamKayit = db.OdemeSekli.Count();
+            var odemeSekli = db.OdemeSekli.OrderBy(x => x.OdemeSekli_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
 
-            ViewResult<Birim> birimler = new ViewResult<Birim>()
+            ViewResult<OdemeSekli> odemeSekliler = new ViewResult<OdemeSekli>()
             {
                 toplamKayit = toplamKayit,
-                Veri = birim,
+                Veri = odemeSekli,
                 aktifSayfa = sayfa
             };
-            return View(birimler);
+            return View(odemeSekliler);
         }
 
-        // GET: Birim/Details/5
+        // GET: OdemeSeklis/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Birim birim = db.Birim.Find(id);
-            if (birim == null)
+            OdemeSekli odemeSekli = db.OdemeSekli.Find(id);
+            if (odemeSekli == null)
             {
                 return HttpNotFound();
             }
-            return View(birim);
+            return View(odemeSekli);
         }
-
         public ActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
-        public JsonResult Create(Birim birim)
+        public JsonResult Create(OdemeSekli odemeSekli)
         {
-            db.Birim.Add(birim);
+            db.OdemeSekli.Add(odemeSekli);
             db.SaveChanges();
 
-            return Json(birim);
+            return Json(odemeSekli);
         }
         [HttpGet]
-        public ActionResult Edit(int? Birim_Id)
+        public ActionResult Edit(int? OdemeSekli_Id)
         {
-            var birim = db.Birim.Find(Birim_Id);
+            var odemeSekli = db.OdemeSekli.Find(OdemeSekli_Id);
 
-            return View("Edit", birim);
+            return View("Edit", odemeSekli);
         }
         [HttpPost]
-        public JsonResult Edit(Birim b)
+        public JsonResult Edit(OdemeSekli o)
         {
-            var birim = db.Birim.Find(b.Birim_Id);
-            birim.Birim_Ad = b.Birim_Ad;
+            var odemeSekli = db.Birim.Find(o.OdemeSekli_Id);
+            odemeSekli.Birim_Ad = o.OdemeSekli_Ad;
             db.SaveChanges();
-            return Json(b);
+            return Json(o);
         }
-        [HttpPost]
         public JsonResult Delete(int? id)
         {
             var hata = "";
-            var birim = db.Birim.Find(id);
+            var odemeSekli = db.OdemeSekli.Find(id);
 
-            if (birim.Stok.Count() == 0)
+            if (odemeSekli.Fatura.Count() == 0)
             {
-                db.Birim.Remove(birim);
+                db.OdemeSekli.Remove(odemeSekli);
                 db.SaveChanges();
             }
             else
             {
-                hata = "Bu birimi kullanan Stoklar silinmesi gerekiyor !";
+                hata = "Bu ödeme Şekli ile kesilmiş faturalar silimesi gerekiyor !";
             }
             return Json(hata);
         }

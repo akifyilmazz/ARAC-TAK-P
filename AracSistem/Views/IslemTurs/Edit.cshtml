@@ -1,8 +1,7 @@
-﻿@{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model AracSistem.Models.IslemTur
+@{
+    ViewBag.Title = "Edit";
 }
-
 @section HeaderCss{
     <link href="~/Content/css/Home/Cars/addCars/addCars.css" rel="stylesheet" />
     <link href="~/Content/css/Shared/_Layout.css" rel="stylesheet" />
@@ -24,12 +23,15 @@
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","IslemTurs")">İşlem Tür</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">IslemTurs Ekle</li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Edit","IslemTurs")">İşlem Tür Düzenle</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">İşlem Tür Düzenle</li>
                             </ol>
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="kontrol()" class="btn btn-success">Kaydet</a>
+                        <a data-toggle="modal" data-target="#silModal" class="btn btn-danger btn-sm silBtn">Sil</a>
+                        <a href="javascript:;" onclick="editIslemTur()" class="btn btn-success">Güncelle</a>
+
                     </div>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                     <div class="card-header border-0">
                         <div class="row">
                             <div class="col-md-6">
-                                <h2 class="mb-0" style="">İşlem Tür Ekle</h2>
+                                <h2 class="mb-0" style="">İşlem Tür Düzenle</h2>
                             </div>
                         </div>
                     </div>
@@ -56,15 +58,16 @@
                         <form>
                             <div class="pl-lg-4">
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-control-label" for="input-username">İşlem Tür Ekle Ad</label>
-                                            <input type="text" id="input-islemTurAd" class="form-control" placeholder="İşlem Tür Adı giriniz  *">
+                                            <label class="form-control-label" for="input-username">İşlem Tür Ad</label>
+                                            <input type="text" id="input-islemTurAd" class="form-control" placeholder="İşlem Tur Ad giriniz  *" value="@Model.IslemTur_Ad">
+                                            <input style="display:none" type="text" id="input-islemturId" class="form-control" value="@Model.IslemTur_Id">
                                         </div>
                                     </div>
                                     <div class="col-md-6 chckbox">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck1" value="@Model.IslemTur_Tip">
                                             <label class="custom-control-label" for="customCheck1">İşlem Tür Tip giriniz</label>
                                         </div>
                                     </div>
@@ -81,17 +84,39 @@
         </div>
     </div>
 </section>
+<section>
+    <div class="modal fade" id="silModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Silmek İstediğine Emin misin ?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" onclick="deleteIslemTurs(@Model.IslemTur_Id)" data-dismiss="modal" class="btn btn-primary">Evet</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
+@section EditBirim{
 
-@section CreateIslemTur{
     <script>
-        function islemTurEkle() {
+        function editIslemTur() {
             data = {
+                IslemTur_Id: $('#input-islemturId').val(),
                 IslemTur_Ad: $('#input-islemTurAd').val(),
                 IslemTur_Tip: $('#customCheck1').prop('checked'),
             }
             $.ajax({
-                url: '/IslemTurs/Create/',
+                url: '/IslemTurs/Edit/',
                 type: 'POST',
                 data: data,
                 dataType: 'json',
@@ -99,8 +124,8 @@
                     if (data.IslemTur_Id > 0) {
                         toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
                         setTimeout(function () {
-                            window.location = "../IslemTurs";
-                        }, 1500)
+                            window.location = "/IslemTurs"
+                        }, 250)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {
@@ -110,18 +135,31 @@
                 }
             });
         }
-        function kontrol() {
-            var hata = "";
-            var IslemTur_Ad = $('#input-islemTurAd').val();
-            var IslemTur_Tip = $('#customCheck1').prop('checked');
-            if (IslemTur_Ad == "") {
-                hata = "Lütfen işlem tür adı giriniz";
-            }
-            if (hata != "") {
-                toastr.success(hata);
-            } else {
-                islemTurEkle();
-            }
+    </script>
+    <script>
+        function deleteIslemTurs(id) {
+            $.ajax({
+                url: '/IslemTurs/Delete/',
+                type: 'POST',
+                data: { "IslemTur_Id": id },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        toastr.success(data);
+                    }
+                    else {
+                        toastr.success('Başarıyla Slindi Yönlendiriliyorsunuz');
+                        setTimeout(function () {
+                            window.location = "../IslemTurs"
+                        }, 1500)
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
         }
     </script>
 }

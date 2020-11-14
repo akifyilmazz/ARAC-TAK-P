@@ -9,5 +9,6 @@ namespace AracSistem.ViewModels
     public class RuhsatCreat
     {
         public List<Musteri> Musteris { get; set; }
+
     }
 }

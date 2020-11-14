@@ -26,6 +26,5 @@ namespace AracSistem.ViewModels
 
         public List<IslemTur> IslemTurs { get; set; }
 
-
     }
 }

@@ -75,46 +75,23 @@ namespace AracSistem.Controllers
             db.SaveChanges();
             return Json(k);
         }
-
-
-
-
         [HttpPost]
-        public JsonResult KategoriGetir(int? kategorID, string tip)
+        public JsonResult Delete(int? id)
         {
-            List<SelectListItem> sonuc = new List<SelectListItem>();
-            bool basariliMi = true;
-            try
-            {
-                        //veritabanımızdaki iller tablomuzdan illerimizi sonuc değişkenimze atıyoruz
-                        foreach (var kategori in db.Kategori.ToList())
-                        {
-                            sonuc.Add(new SelectListItem
-                            {
-                                Text = kategori.Kategori_Ad,
-                                Value = kategori.Kategori_Id.ToString()
-                            });
-                        }
-                   
-            }
-            catch (Exception)
-            {
-                //hata ile karşılaşırsak buraya düşüyor
-                basariliMi = false;
-                sonuc = new List<SelectListItem>();
-                sonuc.Add(new SelectListItem
-                {
-                    Text = "Bir hata oluştu :(",
-                    Value = "Default"
-                });
+            var hata = "";
+            var kategori = db.Kategori.Find(id);
 
+            if (kategori.Stok.Count() == 0)
+            {
+                db.Kategori.Remove(kategori);
+                db.SaveChanges();
             }
-            //Oluşturduğum sonucları json olarak geriye gönderiyorum
-            return Json(new { ok = basariliMi, text = sonuc });
+            else
+            {
+                hata = "Bu Kategori İle Seçilmiş Faturalar silinmesi gerekiyor !";
+            }
+            return Json(hata);
         }
-
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

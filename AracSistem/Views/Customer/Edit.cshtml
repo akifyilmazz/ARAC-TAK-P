@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                 
+
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="form-control-label">Adres</label>
@@ -90,15 +90,15 @@
 
                                 </div>
                             </div>
-                    </form>
-                </div>
-                <!-- end: card body -->
-                <!-- Card footer -->
-                <div class="card-footer py-4">
+                        </form>
+                    </div>
+                    <!-- end: card body -->
+                    <!-- Card footer -->
+                    <div class="card-footer py-4">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     </div>
 </section>
@@ -127,6 +127,32 @@
                         setTimeout(function () {
                             window.location = "/Customer"
                         }, 250)
+                    }
+                },
+                error: function (hata, ajaxOptions, thrownError) {
+                    alert(hata.status);
+                    alert(thrownError);
+                    alert(hata.responseText);
+                }
+            });
+        }
+    </script>
+    <script>
+        function deleteBirim(id) {
+            $.ajax({
+                url: '/Customer/Delete/',
+                type: 'POST',
+                data: { "id": id },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        toastr.success(data);
+                    }
+                    else {
+                        toastr.success('Başarıyla Slindi Yönlendiriliyorsunuz');
+                        setTimeout(function () {
+                            window.location = "../Customer"
+                        }, 1500)
                     }
                 },
                 error: function (hata, ajaxOptions, thrownError) {

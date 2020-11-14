@@ -19,7 +19,7 @@ namespace AracSistem.Controllers
         public ActionResult Index(int sayfa = 0)
         {
             int toplamKayit = db.Arac.Count();
-            var arac = db.Arac.OrderBy(x => x.Arac_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
+            var arac = db.Arac.OrderByDescending(x => x.Arac_Id).Skip(10 / 1 * sayfa).Take(10).ToList();
 
             ViewResult<Arac> araclar = new ViewResult<Arac>()
             {

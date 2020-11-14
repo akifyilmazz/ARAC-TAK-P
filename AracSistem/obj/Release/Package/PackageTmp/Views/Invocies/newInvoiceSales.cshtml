@@ -5,6 +5,9 @@
     ViewBag.Title = "addInvoices";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int j = 0;
+    Random rnd = new Random();
+    int ranSay = 0;
+    
 }
 
 
@@ -50,12 +53,15 @@
         .stokModalBody thead tr th {
             text-align: center
         }
-       .tableGizle{
-           display:none
-       }
-       .tableGoster{
-           display:block
-       }
+
+        .tableGizle {
+            display: none
+        }
+
+        .tableGoster {
+            display: block
+        }
+
         .card-body.detay {
             box-shadow: 1px 3px 14px 0px rgb(218 217 217 / 75%)
         }
@@ -63,6 +69,7 @@
         card-body.detay .row .col-md-3, card-body.detay .row .col-md-3 {
             text-align: center
         }
+
         .card-body .detay .row {
             padding: 5% 5% 5% 5%;
         }
@@ -80,12 +87,12 @@
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Invocies")">Faturalar</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("Creat","Invocies")">Fatura Ekle</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Create","Invocies")">Fatura Müşteri Seç</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Satış</li>
                             </ol>
                         </nav>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -215,15 +222,17 @@
                         <form>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table class="stokTable tableGizle">
+                                    <table id="stokTable" class="stokTable tableGizle">
                                         <tr>
                                             <th><strong>Barkod</strong></th>
                                             <th><strong>Stok Ad</strong></th>
                                             <th><strong>Alış Fiyatı</strong></th>
                                             <th><strong>Satış Fiyatı</strong></th>
+                                            <th><strong>Miktar</strong></th>
                                             <th><strong>Birim</strong></th>
                                             <th><strong>Kategori</strong></th>
-                                            <th><strong>#</strong></th>
+                                            <th><strong>Toplam Fiyat</strong></th>
+                                            <th></th>
                                         </tr>
                                         <tbody id="stokBody"></tbody>
                                     </table>
@@ -240,11 +249,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Toplam Fiyat</h5>
-                                          <input type="text" id="input-toplamFiyat" class="form-control" value="0" readonly/>
+                                            <input type="text" id="input-toplamFiyat" class="form-control" value="0" readonly />
                                         </div>
                                         <div class="col-md-6">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Genel Toplam Fiyat</h5>
-                                            <input type="text" id="input-gToplamFiyat" class="form-control"value="0" readonly/>
+                                            <input type="text" id="input-gToplamFiyat" class="form-control" value="0" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -254,7 +263,7 @@
                     <!-- end: card body -->
                     <!-- Card footer -->
                     <div class="card-footer py-4">
-                        <a href="javascript:;" onclick="FaturaKaydet()" class="btn btn-warning">Kaydet</a>
+                        <a href="javascript:;" onclick="kontrol()" class="btn btn-warning">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -295,6 +304,7 @@
                                 @foreach (var item in Model.Stoks)
                                 {
                                     j++;
+                                    ranSay = rnd.Next(100);
                                     <tr>
                                         <td scope="row">
                                             <div class="media align-items-center">
@@ -307,20 +317,20 @@
                                         <td scope="row">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <input id="input-Stok_Barkod_@j" value="@item.Stok_Barkod" readonly style="border:none" />
+                                                    <input id="input-Stok_Barkod_@ranSay" value="@item.Stok_Barkod" readonly style="border:none" />
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="budget">
-                                            <input id="input-Stok_Ad_@j" value="@item.Stok_Ad" readonly />
+                                            <input id="input-Stok_Ad_@ranSay" value="@item.Stok_Ad" readonly />
                                         </td>
                                         <td class="budget">
-                                            <input id="input-Stok_AlisFiyat_@j" value="@item.Stok_AlisFiyat" readonly />
+                                            <input id="input-Stok_AlisFiyat_@ranSay" value="@item.Stok_AlisFiyat" readonly />
                                         </td>
                                         <td class="budget">
-                                            <input id="input-Stok_SatisFiyat_@j" value="@item.Stok_SatisFiyat" readonly />
+                                            <input id="input-Stok_SatisFiyat_@ranSay" value="@item.Stok_SatisFiyat" readonly />
                                         <td class="text-center">
-                                            <button onClick="stokEkle(@item.Stok_Id,@item.Stok_SatisFiyat)" class="btn btn-info" data-dismiss="modal">Seç</button>
+                                            <button onClick="stokEkle(@ranSay,@item.Stok_Id,@item.Stok_SatisFiyat)" class="btn btn-info" data-dismiss="modal">Seç</button>
                                         </td>
                                     </tr>
                                 }
@@ -342,20 +352,65 @@
             "Fatura": [],
             "Arac_Islems": [],
             "Musteri": [],
-            "Stoks": [],
+            "Stok_Islems": [],
         }
     </script>
     <script>
+        function StokIslemSatisFiyatChange(item) {
+            var stokId = $('#input-stokId_' + item).val();
+            var miktar = parseFloat(document.getElementById('input-StokIslemmiktar_' + item).value);
+            var stokIslemSatisFiyat = parseFloat(document.getElementById('input-satisFiyat_' + item).value);
+            var yenistokIslemToplamDeger = miktar * stokIslemSatisFiyat;
+            document.getElementById('input-StokIslemtoplamFiyat_' + item).value = yenistokIslemToplamDeger;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Miktar = miktar;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Tutar = stokIslemSatisFiyat;
+            faturaToplamFiyati();
+        }
+
+        function StokIslemMiktarchange(item) {
+            var stokId = $('#input-stokId_' + item).val();
+            var miktar = parseFloat(document.getElementById('input-StokIslemmiktar_' + item).value);
+            var stokIslemSatisFiyat = parseFloat(document.getElementById('input-satisFiyat_' + item).value);
+            var yenistokIslemToplamDeger = miktar * stokIslemSatisFiyat;
+            document.getElementById('input-StokIslemtoplamFiyat_' + item).value = yenistokIslemToplamDeger;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Miktar = miktar;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Tutar = stokIslemSatisFiyat;
+            faturaToplamFiyati();
+        }
+
         function StokSil(item) {
-            var silinenStokDeger = parseFloat(document.getElementById('input-satisFiyat_' + item).value);
+            var stokId = $('#input-stokId_' + item).val();
+            //var asdas = NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId);
+            //asdas.removeClass();
             $("#" + item).remove();
-            document.getElementById('input-toplamFiyat').value = parseFloat($("#input-toplamFiyat").val()) - silinenStokDeger;
+            faturaToplamFiyati();
+
+            var stokSay = $("#stokBody tr").length;
+            if (stokSay == 0) {
+                $(".stokTable").removeClass("tableGoster");
+                $(".stokTable").addClass("tableGizle");
+            }
         }
-    </script>
-    <script>
-        function stokEkle(item,satisFiyat) {
+
+        function faturaToplamFiyati() {//bu fonk her girdiğinde tüm stok tutarlarını hesaplıyıp fatura toplam fiyata yansıtıyor
+            var i = 0;
+            var tBody = document.getElementById("stokBody");
+            var stokSay = $("#stokBody tr").length;
+            document.getElementById('input-toplamFiyat').value = parseFloat(0);
+            for (i; i < stokSay; i++) {
+                var RandSay = tBody.rows[i].id;
+                var stokTopDeger = parseFloat($("#" + RandSay + " td #input-StokIslemtoplamFiyat_" + RandSay).val());
+                var faturaTopFiyat = parseFloat(document.getElementById('input-toplamFiyat').value);
+                document.getElementById('input-toplamFiyat').value = faturaTopFiyat + stokTopDeger;
+            }
+        }
+
+
+        function stokEkle(randSay, stokId, satisFiyat) {
             $(".stokTable").removeClass("tableGizle");
             $(".stokTable").addClass("tableGoster");
+
+
             var eklenenStokDeger = parseFloat(document.getElementById('input-toplamFiyat').value);
             ToplamArttir();
 
@@ -364,25 +419,22 @@
                 document.getElementById('input-toplamFiyat').value = eklenenStokDeger + satisFiyat;
             }
 
-
             $.ajax({
                 url: '/Invocies/stokEklePartialView/',
                 type: 'POST',
-                data: { a: item },
+                data: { a: randSay, b: stokId },
                 dataType: 'html',
                 success: function (data) {
                     $("#stokBody").append(data);
-                    var StokNesnem = {
-                        "stok_Id": $("#stokBody tr td #input-stokId_" + item).val(),
-                        "Stok_Ad": $("#stokBody tr td #input-Ad_" + item).val(),
-                        "Stok_Barkod": $("#stokBody tr td #input-barkod_" + item).val(),
-                        "Stok_AlisFiyat": $("#stokBody tr td #input-alisFiyat_" + item).val(),
-                        "Stok_SatisFiyat": $("#stokBody tr td #input-satisFiyat_" + item).val(),
-                        "Birim_Id": $("#stokBody tr td #input-birimId_" + item).val(),
-                        "Kategori_Id": $("#stokBody tr td #input-kategoriId_" + item).val(),
+                    var StokIslemNesnem = {
+                        "stok_Id": $("#stokBody tr td #input-stokId_" + randSay).val(),
+                        "IslemTur_Id": $('#input-İslemTur option:selected').val(),
+                        "StokIslem_Miktar": $("#stokBody tr td #input-StokIslemmiktar_" + randSay).val(),
+                        "StokIslem_Tarih": $('#input-faturaTarih').val(),
+                        "StokIslem_Tutar": $("#stokBody tr td #input-StokIslemtoplamFiyat_" + randSay).val(),
                     }
-                    NewInvociesSales.Stoks.push(StokNesnem);    
-
+                    NewInvociesSales.Stok_Islems.push(StokIslemNesnem);
+                    faturaToplamFiyati();
                 },
                 error: function (hata, ajaxOptions, thrownError) {
                     alert(hata.status);
@@ -392,10 +444,6 @@
             });
         }
 
-        var i;
-        var adet = 0;
-        var stokBilg = new Array();
-        var musteriBilg
         function FaturaKaydet() {
             var faturaNesnem = {
                 "IslemTur_Id": $('#input-İslemTur').val(),
@@ -438,6 +486,48 @@
                     alert(hata.responseText);
                 }
             });
+        }
+
+        function kontrol() {
+            var hata = "";
+            var fatAciklama = $("#input-faturaAciklama").val();
+            var fatTarih = $("#input-faturaTarih").val();
+            var odemeSekli = $("#input-odemeSekli").val();
+            var islemTur = $("#input-İslemTur").val();
+            var stokId = $(".stokId").val();
+            var plaka = $("#input-aracId").val();
+            var km = $("#input-aracIslemAracKm").val();
+            var aracAciklama = $("#input-aracIslemAciklama").val();
+            debugger;
+            if (fatAciklama == "") {
+                hata = "Lütfen fatura açıklamasını giriniz"
+            }
+            else if (fatTarih == "") {
+                hata = "Lütfen fatura tarihini giriniz";
+            }
+            else if (odemeSekli == "Seçim Yap") {
+                hata = "Lütfen ödeme şeklini giriniz";
+            }
+            else if (islemTur == "Seçim p") {
+                hata = "Lütfen işlem türü seçiniz";
+            }
+            else if (stokId == undefined) {
+                hata = "Lütfen stok seçiniz";
+            }
+            else if (plaka == "Seçim YaP") {
+                hata = "Lütfen plaka seçin";
+            }
+            else if (km == "") {
+                hata = "Lütfen araç km girin";
+            }
+            else if (aracAciklama == "") {
+                hata = "Lütfen araç açıklaması girin";
+            }
+            if (hata != "") {
+                toastr.success(hata);
+            } else{
+                FaturaKaydet();
+            }
         }
     </script>
 }

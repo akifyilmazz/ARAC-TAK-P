@@ -24,7 +24,7 @@
                         </nav>
                     </div>
                     <div class="col-lg-6 col-5 text-right">
-                        <a href="javascript:;" onclick="customerEkle()" class="btn btn-success">Kaydet</a>
+                        <a href="javascript:;" onclick="kontrol()" class="btn btn-success">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -63,10 +63,10 @@
                                             <input type="text" id="input-mail" class="form-control" placeholder="Mail Giriniz  *">
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row">
-                                    
+
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">Telefon</label>
@@ -105,7 +105,7 @@
         function customerEkle() {
             data = {
                 Musteri_AdSoyad: $('#input-adSoyad').val(),
-                Musteri_CepTelefon:$('#input-ceptel').val(),
+                Musteri_CepTelefon: $('#input-ceptel').val(),
                 Musteri_Telefon: $('#input-telefon').val(),
                 Musteri_Mail: $('#input-mail').val(),
                 Musteri_Adres: $('#input-adres').val(),
@@ -116,10 +116,10 @@
                 data: data,
                 dataType: 'json',
                 success: function (data) {
-                        toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
-                        setTimeout(function () {
-                            window.location = "../Customer";
-                        }, 250)
+                    toastr.success('Başarıyla oluşturuldu! Yönlendiriliyorsunuz');
+                    setTimeout(function () {
+                        window.location = "../Customer";
+                    }, 250)
                 },
                 error: function (hata, ajaxOptions, thrownError) {
                     alert(hata.status);
@@ -128,6 +128,33 @@
                 }
             });
         }
-
+        function kontrol() {
+            var hata = "";
+            var Musteri_AdSoyad = $("#input-adSoyad").val();
+            var Musteri_Mail = $("#input-mail").val();
+            var Musteri_Telefon = $("#input-telefon").val();
+            var Musteri_CepTelefon = $("#input-ceptel").val();
+            var Musteri_Adres = $("#input-adres").val();
+            if (Musteri_AdSoyad == "") {
+                hata = "Lütfen Müsteri Ad ve soyadını giriniz"
+            }
+            else if (Musteri_Mail == "") {
+                hata = "Lütfen mail giriniz";
+            }
+            else if (Musteri_Telefon == "") {
+                hata = "Lütfen telefon giriniz";
+            }
+            else if (Musteri_CepTelefon == "") {
+                hata = "Lütfen cep telefonu seçiniz";
+            }
+            else if (Musteri_Adres == "") {
+                hata = "Lütfen adres seçiniz";
+            }
+            if (hata != "") {
+                toastr.success(hata);
+            } else {
+                customerEkle();
+            }
+        }
     </script>
 }

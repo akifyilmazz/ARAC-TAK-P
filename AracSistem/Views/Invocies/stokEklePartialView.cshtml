@@ -5,17 +5,19 @@
 }
 <tr id="@Model.RandSay">
 
-    <td><input type='text' id="input-barkod_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_Barkod" class='form-control barkodAd' /></td>
-    <td><input type='text' id="input-Ad_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_Ad" class='form-control stokAd' /></td>
-    <td><input type='text' id="input-alisFiyat_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_AlisFiyat" class='form-control stokAlisFiyat' /></td>
-    <td><input type='text' id="input-satisFiyat_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_SatisFiyat" class='form-control stokSatisFiyat' /></td>
-    <td><input type='text' id="input-birim_@Model.Stoks.Stok_Id" value="@Model.Stoks.Birim.Birim_Ad" class='form-control birimAd' /></td>
-    <td><input type='text' id="input-kategori_@Model.Stoks.Stok_Id" value="@Model.Stoks.Kategori.Kategori_Ad" class='form-control kategoriAd' /></td>
-    <td><input type='text' id="input-kategoriId_@Model.Stoks.Stok_Id" value="@Model.Stoks.Kategori_Id" class='form-control kategoriId' style="display:none" /></td>
-    <td><input type='text' id="input-birimId_@Model.Stoks.Stok_Id" value="@Model.Stoks.Birim_Id" class='form-control birimId' style="display:none" /></td>
-    <td><input type='text' id="input-stokId_@Model.Stoks.Stok_Id" value="@Model.Stoks.Stok_Id" class='form-control stokId' style="display:none" /></td>
+    <td><input type='text' id="input-barkod_@Model.RandSay" value="@Model.Stoks.Stok_Barkod" class='form-control barkodAd' readonly/></td>
+    <td><input type='text' id="input-Ad_@Model.RandSay" value="@Model.Stoks.Stok_Ad" class='form-control stokAd' readonly/></td>
+    <td><input type='text' id="input-alisFiyat_@Model.RandSay" value="@Model.Stoks.Stok_AlisFiyat" class='form-control stokAlisFiyat' readonly/></td>
+    <td><input type='text' onchange="StokIslemSatisFiyatChange(@Model.RandSay)" id="input-satisFiyat_@Model.RandSay" value="@Model.Stoks.Stok_SatisFiyat" class='form-control stokSatisFiyat' /></td>
+    <td><input type='text' onchange="StokIslemMiktarchange(@Model.RandSay)" id="input-StokIslemmiktar_@Model.RandSay" value="1" class='form-control stokIslemMiktar' /></td>
+    <td><input type='text' id="input-birim_@Model.RandSay" value="@Model.Stoks.Birim.Birim_Ad" class='form-control birimAd' readonly/></td>
+    <td><input type='text' id="input-kategori_@Model.RandSay" value="@Model.Stoks.Kategori.Kategori_Ad" class='form-control kategoriAd' readonly/></td>
+    <td><input type='text' id="input-StokIslemtoplamFiyat_@Model.RandSay" value="@Model.Stoks.Stok_SatisFiyat" class='form-control stokIslemToplamFiyat' runat="server" clientIdMode="static" readonly/></td>
+    <td><input type='text' id="input-kategoriId_@Model.RandSay" value="@Model.Stoks.Kategori_Id" class='form-control kategoriId' style="display:none" /></td>
+    <td><input type='text' id="input-birimId_@Model.RandSay" value="@Model.Stoks.Birim_Id" class='form-control birimId' style="display:none" /></td>
+    <td><input type='text' id="input-stokId_@Model.RandSay" value="@Model.Stoks.Stok_Id" class='form-control stokId' style="display:none" /></td>
 
 
-    <td><a style="font-size:35px" href="javascript:;" onclick="StokSil(@Model.RandSay)" href="#"><i class="ni ni-fat-remove fa-lg"></i></a></td>
+    <td><a style="font-size:35px" href="javascript:;" onclick="StokSil(@Model.RandSay)"><i class="ni ni-fat-remove fa-lg"></i></a></td>
 
 </tr>

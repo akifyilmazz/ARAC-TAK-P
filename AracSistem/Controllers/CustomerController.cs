@@ -74,6 +74,22 @@ namespace AracSistem.Controllers
             db.SaveChanges();
             return Json(m);
         }
+        public JsonResult Delete(int? id)
+        {
+            var hata = "";
+            var musteri = db.Musteri.Find(id);
+
+            if (musteri.Ruhsat.Count() == 0)
+            {
+                db.Musteri.Remove(musteri);
+                db.SaveChanges();
+            }
+            else
+            {
+                hata = "Bu Müşteriye ait Ruhstların silinmesi gerekiyor !";
+            }
+            return Json(hata);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

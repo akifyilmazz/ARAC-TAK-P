@@ -5,7 +5,8 @@
     ViewBag.Title = "addInvoices";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int j = 0;
-    int i = 0;
+    Random rnd = new Random();
+    int ranSay;
 }
 
 
@@ -85,7 +86,7 @@
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")"><i class="fas fa-home"></i></a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Ana Sayfa</a></li>
                                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Invocies")">Faturalar</a></li>
-                                <li class="breadcrumb-item"><a href="@Url.Action("Details","Invocies", new { Fatura_Id= Model.Fatura.Fatura_Id})>Fatura Detay</a></li>
+                                <li class="breadcrumb-item"><a href="@Url.Action("Details","Invocies", new { Fatura_Id= Model.Fatura.Fatura_Id})">Fatura Detay</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Satış Düzenle</li>
                             </ol>
                         </nav>
@@ -146,7 +147,7 @@
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-tel">Adres</label>
-                                                <textarea rows="6" id="input-adres" class="form-control" >@Model.Musteri.Musteri_Adres</textarea>
+                                                <textarea rows="6" id="input-adres" class="form-control">@Model.Musteri.Musteri_Adres</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +157,8 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-username">Fatura Tarihi</label>
-                                                <input type="date" id="input-faturaTarih" class="form-control" value="@Model.Fatura.Fatura_Tarih">
+                                                <input type="datetime" id="input-faturaTarih" class="form-control" value="@Model.Fatura.Fatura_Tarih">
+                                                <input type="text" id="input-faturaId" class="form-control" value="@Model.Fatura.Fatura_Id" style="display:none">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -205,6 +207,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-aracIslemKm">Araç Km</label>
                                                 <input type="text" id="input-aracIslemAracKm" class="form-control" value="@Model.Arac_Islems.AracIslem_Km" />
+                                                <input type="text" id="input-aracIslemAracId" class="form-control" value="@Model.Arac_Islems.AracIslem_Id" style="display:none" />
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -226,25 +229,29 @@
                                             <th><strong>Stok Ad</strong></th>
                                             <th><strong>Alış Fiyatı</strong></th>
                                             <th><strong>Satış Fiyatı</strong></th>
+                                            <th><strong>Miktar</strong></th>
                                             <th><strong>Birim</strong></th>
                                             <th><strong>Kategori</strong></th>
-                                            <th><strong>#</strong></th>
+                                            <th><strong>Toplam Fiyat</strong></th>
                                         </tr>
                                         <tbody id="stokBody">
                                             @foreach (var item in Model.Stok_Islems)
                                             {
-                                                i++;
-                                                <tr>
-                                                    <td><input type='text' id="input-barkod_@item.Stok_Id" value="@item.Stok.Stok_Barkod" class='form-control barkodAd' /></td>
-                                                    <td><input type='text' id="input-Ad_@item.Stok_Id" value="@item.Stok.Stok_Ad" class='form-control stokAd' /></td>
-                                                    <td><input type='text' id="input-alisFiyat_@item.Stok_Id" value="@item.Stok.Stok_AlisFiyat" class='form-control stokAlisFiyat' /></td>
-                                                    <td><input type='text' id="input-satisFiyat_@item.Stok_Id" value="@item.Stok.Stok_SatisFiyat" class='form-control stokSatisFiyat' /></td>
-                                                    <td><input type='text' id="input-birim_@item.Stok_Id" value="@item.Stok.Birim.Birim_Ad" class='form-control birimAd' /></td>
-                                                    <td><input type='text' id="input-kategori_@item.Stok_Id" value="@item.Stok.Kategori.Kategori_Ad" class='form-control kategoriAd' /></td>
-                                                    <td><input type='text' id="input-kategoriId_@item.Stok_Id" value="@item.Stok.Kategori.Kategori_Id" class='form-control kategoriId' style="display:none" /></td>
-                                                    <td><input type='text' id="input-birimId_@item.Stok_Id" value="@item.Stok.Birim.Birim_Id" class='form-control birimId' style="display:none" /></td>
-                                                    <td><input type='text' id="input-stokId_@item.Stok_Id" value="@item.Stok.Stok_Id" class='form-control stokId' style="display:none" /></td>
-                                                    <td><a style="font-size:35px" href="javascript:;" onclick="StokSil(@i)" href="#"><i class="ni ni-fat-remove fa-lg"></i></a></td>
+                                                ranSay = rnd.Next(500);
+                                                <tr id="@ranSay">
+                                                    <td><input type='text' id="input-barkod_@ranSay" value="@item.Stok.Stok_Barkod" class='form-control barkodAd' readonly /></td>
+                                                    <td><input type='text' id="input-Ad_@ranSay" value="@item.Stok.Stok_Ad" class='form-control stokAd' readonly /></td>
+                                                    <td><input type='text' id="input-alisFiyat_@ranSay" value="@item.Stok.Stok_AlisFiyat" class='form-control stokAlisFiyat' readonly /></td>
+                                                    <td><input type='text' onchange="StokIslemSatisFiyatChange(@ranSay)" id="input-satisFiyat_@ranSay" value="@item.Stok.Stok_SatisFiyat" class='form-control stokSatisFiyat' /></td>
+                                                    <td><input type='text' onchange="StokIslemMiktarchange(@ranSay)" id="input-StokIslemmiktar_@ranSay" value="1" class='form-control stokIslemMiktar' /></td>
+                                                    <td><input type='text' id="input-birim_@ranSay" value="@item.Stok.Birim.Birim_Ad" class='form-control birimAd' readonly /></td>
+                                                    <td><input type='text' id="input-kategori_@ranSay" value="@item.Stok.Kategori.Kategori_Ad" class='form-control kategoriAd' readonly /></td>
+                                                    <td><input type='text' id="input-StokIslemtoplamFiyat_@ranSay" value="@item.Stok.Stok_SatisFiyat" class='form-control stokIslemToplamFiyat'  readonly /></td>
+                                                    <td><input type='text' id="input-kategoriId_@ranSay" value="@item.Stok.Kategori_Id" class='form-control kategoriId' style="display:none" /></td>
+                                                    <td><input type='text' id="input-birimId_@ranSay" value="@item.Stok.Birim_Id" class='form-control birimId' style="display:none" /></td>
+                                                    <td><input type='text' id="input-stokId_@ranSay" value="@item.Stok.Stok_Id" class='form-control stokId' style="display:none" /></td>
+
+                                                    <td><a style="font-size:35px" href="javascript:;" onclick="StokSil(@ranSay)"><i class="ni ni-fat-remove fa-lg"></i></a></td>
                                                 </tr>
                                             }
                                         </tbody>
@@ -276,7 +283,7 @@
                     <!-- end: card body -->
                     <!-- Card footer -->
                     <div class="card-footer py-4">
-                        <a href="javascript:;" onclick="sda()" class="btn btn-warning">Kaydet</a>
+                        <a href="javascript:;" onclick="kontrol()" class="btn btn-warning">Kaydet</a>
                     </div>
                 </div>
             </div>
@@ -317,7 +324,8 @@
                                 @foreach (var item in Model.Stoks)
                                 {
                                     j++;
-                                    <tr id="@item.Stok_Id">
+                                    ranSay = rnd.Next(500);
+                                    <tr id="ranSay">
                                         <td scope="row">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
@@ -329,20 +337,20 @@
                                         <td scope="row">
                                             <div class="media align-items-center">
                                                 <div class="media-body">
-                                                    <input id="input-Stok_Barkod_@j" value="@item.Stok_Barkod" readonly style="border:none" />
+                                                    <input id="input-Stok_Barkod_@ranSay" value="@item.Stok_Barkod" readonly style="border:none" />
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="budget">
-                                            <input id="input-Stok_Ad_@j" value="@item.Stok_Ad" readonly />
+                                            <input id="input-Stok_Ad_@ranSay" value="@item.Stok_Ad" readonly />
                                         </td>
                                         <td class="budget">
-                                            <input id="input-Stok_AlisFiyat_@j" value="@item.Stok_AlisFiyat" readonly />
+                                            <input id="input-Stok_AlisFiyat_@ranSay" value="@item.Stok_AlisFiyat" readonly />
                                         </td>
                                         <td class="budget">
-                                            <input id="input-Stok_SatisFiyat_@j" value="@item.Stok_SatisFiyat" readonly />
+                                            <input id="input-Stok_SatisFiyat_@ranSay" value="@item.Stok_SatisFiyat" readonly />
                                         <td class="text-center">
-                                            <button onClick="stokEkle(@item.Stok_Id,@item.Stok_SatisFiyat)" class="btn btn-info" data-dismiss="modal">Seç</button>
+                                            <button onClick="stokEkle(@ranSay,@item.Stok_Id,@item.Stok_SatisFiyat)" class="btn btn-info" data-dismiss="modal">Seç</button>
                                         </td>
                                     </tr>
                                 }
@@ -364,20 +372,68 @@
             "Fatura": [],
             "Arac_Islems": [],
             "Musteri": [],
-            "Stoks": [],
+            "Stok_Islems": [],
         }
     </script>
     <script>
+        var i = 0;
+        var tBody = document.getElementById("stokBody");
+        var stokSay = $("#stokBody tr").length;
+        document.getElementById('input-toplamFiyat').value = parseFloat(0);
+        for (i; i < stokSay; i++) {
+            var RandSay = tBody.rows[i].id;
+            var stokNesnem2 = {
+                "stok_Id": $("#stokBody tr td #input-stokId_" + RandSay).val(),
+                "IslemTur_Id": $('#input-İslemTur option:selected').val(),
+                "StokIslem_Miktar": $("#stokBody tr td #input-StokIslemmiktar_" + RandSay).val(),
+                "StokIslem_Tarih": $('#input-faturaTarih').val(),
+                "StokIslem_Tutar": $("#stokBody tr td #input-StokIslemtoplamFiyat_" + RandSay).val(),
+            }
+            NewInvociesSales.Stok_Islems.push(stokNesnem2);
+        }
+        faturaToplamFiyati();
+
+        function StokIslemSatisFiyatChange(item) {
+            var stokId = $('#input-stokId_' + item).val();
+            var miktar = parseFloat(document.getElementById('input-StokIslemmiktar_' + item).value);
+            var stokIslemSatisFiyat = parseFloat(document.getElementById('input-satisFiyat_' + item).value);
+            var yenistokIslemToplamDeger = miktar * stokIslemSatisFiyat;
+            document.getElementById('input-StokIslemtoplamFiyat_' + item).value = yenistokIslemToplamDeger;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Miktar = miktar;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Tutar = stokIslemSatisFiyat;
+            faturaToplamFiyati();
+        }
+
+        function StokIslemMiktarchange(item) {
+            var stokId = $('#input-stokId_' + item).val();
+            var miktar = parseFloat(document.getElementById('input-StokIslemmiktar_' + item).value);
+            var stokIslemSatisFiyat = parseFloat(document.getElementById('input-satisFiyat_' + item).value);
+            var yenistokIslemToplamDeger = miktar * stokIslemSatisFiyat;
+            document.getElementById('input-StokIslemtoplamFiyat_' + item).value = yenistokIslemToplamDeger;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Miktar = miktar;
+            NewInvociesSales.Stok_Islems.find(x => x.stok_Id == stokId).StokIslem_Tutar = stokIslemSatisFiyat;
+            faturaToplamFiyati();
+        }
+
         function StokSil(item) {
-            var silinenStokDeger = parseFloat(document.getElementById('input-satisFiyat_' + item).value);
             $("#" + item).remove();
-            document.getElementById('input-toplamFiyat').value = parseFloat($("#input-toplamFiyat").val()) - silinenStokDeger;
+            faturaToplamFiyati();
         }
-    </script>
-    <script>
-        function stokEkle(item, satisFiyat) {
-            $(".stokTable").removeClass("tableGizle");
-            $(".stokTable").addClass("tableGoster");
+
+        function faturaToplamFiyati() {//bu fonk her girdiğinde tüm stok tutarlarını hesaplıyıp fatura toplam fiyata yansıtıyor
+            var i = 0;
+            var tBody = document.getElementById("stokBody");
+            var stokSay = $("#stokBody tr").length;
+            document.getElementById('input-toplamFiyat').value = parseFloat(0);
+            for (i; i < stokSay; i++) {
+                var RandSay = tBody.rows[i].id;
+                var stokTopDeger = parseFloat($("#" + RandSay + " td #input-StokIslemtoplamFiyat_" + RandSay).val());
+                var faturaTopFiyat = parseFloat(document.getElementById('input-toplamFiyat').value);
+                document.getElementById('input-toplamFiyat').value = faturaTopFiyat + stokTopDeger;
+            }
+        }
+
+        function stokEkle(randSay, stokId, satisFiyat) {
             var eklenenStokDeger = parseFloat(document.getElementById('input-toplamFiyat').value);
             ToplamArttir();
 
@@ -390,20 +446,19 @@
             $.ajax({
                 url: '/Invocies/stokEklePartialView/',
                 type: 'POST',
-                data: { a: item },
+                data: { a: randSay, b: stokId },
                 dataType: 'html',
                 success: function (data) {
                     $("#stokBody").append(data);
-                    var StokNesnem = {
-                        "stok_Id": $("#stokBody tr td #input-stokId_" + item).val(),
-                        "Stok_Ad": $("#stokBody tr td #input-Ad_" + item).val(),
-                        "Stok_Barkod": $("#stokBody tr td #input-barkod_" + item).val(),
-                        "Stok_AlisFiyat": $("#stokBody tr td #input-alisFiyat_" + item).val(),
-                        "Stok_SatisFiyat": $("#stokBody tr td #input-satisFiyat_" + item).val(),
-                        "Birim_Id": $("#stokBody tr td #input-birimId_" + item).val(),
-                        "Kategori_Id": $("#stokBody tr td #input-kategoriId_" + item).val(),
+                    var StokIslemNesnem = {
+                        "stok_Id": $("#stokBody tr td #input-stokId_" + randSay).val(),
+                        "IslemTur_Id": $('#input-İslemTur option:selected').val(),
+                        "StokIslem_Miktar": $("#stokBody tr td #input-StokIslemmiktar_" + randSay).val(),
+                        "StokIslem_Tarih": $('#input-faturaTarih').val(),
+                        "StokIslem_Tutar": $("#stokBody tr td #input-StokIslemtoplamFiyat_" + randSay).val(),
                     }
-                    NewInvociesSales.Stoks.push(StokNesnem);
+                    NewInvociesSales.Stok_Islems.push(StokIslemNesnem);
+                    faturaToplamFiyati();
 
                 },
                 error: function (hata, ajaxOptions, thrownError) {
@@ -418,8 +473,9 @@
         var adet = 0;
         var stokBilg = new Array();
         var musteriBilg
-        function FaturaKaydet() {
+        function FaturaDüzenle() {
             var faturaNesnem = {
+                "Fatura_Id": $('#input-faturaId').val(),
                 "IslemTur_Id": $('#input-İslemTur').val(),
                 "OdemeSekli_Id": $('#input-odemeSekli').val(),
                 "Fatura_Tarih": $('#input-faturaTarih').val(),
@@ -431,6 +487,7 @@
                 "Arac_Id": $("#input-aracId").val(),
                 "AracIslem_Km": $("#input-aracIslemAracKm").val(),
                 "AracIslem_Aciklama": $("#input-aracIslemAciklama").val(),
+                "AracIslem_Id": $("#input-aracIslemAracId").val(),
             }
             NewInvociesSales.Arac_Islems.push(aracIslemNesnem);
             var musteriNesnem = {
@@ -444,7 +501,7 @@
             NewInvociesSales.Musteri.push(musteriNesnem);
 
             $.ajax({
-                url: '/Invocies/NewInvoiceSales/',
+                url: '/Invocies/Edit/',
                 type: 'POST',
                 data: NewInvociesSales,
                 dataType: 'json',
@@ -460,6 +517,48 @@
                     alert(hata.responseText);
                 }
             });
+        }
+
+        function kontrol() {
+            var hata = "";
+            var fatAciklama = $("#input-faturaAciklama").val();
+            var fatTarih = $("#input-faturaTarih").val();
+            var odemeSekli = $("#input-odemeSekli").val();
+            var islemTur = $("#input-İslemTur").val();
+            var stokId = $(".stokId").val();
+            var plaka = $("#input-aracId").val();
+            var km = $("#input-aracIslemAracKm").val();
+            var aracAciklama = $("#input-aracIslemAciklama").val();
+            debugger;
+            if (fatAciklama == "") {
+                hata = "Lütfen fatura açıklamasını giriniz"
+            }
+            else if (fatTarih == "") {
+                hata = "Lütfen fatura tarihini giriniz";
+            }
+            else if (odemeSekli == "Seçim Yap") {
+                hata = "Lütfen ödeme şeklini giriniz";
+            }
+            else if (islemTur == "Seçim p") {
+                hata = "Lütfen işlem türü seçiniz";
+            }
+            else if (stokId == undefined) {
+                hata = "Lütfen stok seçiniz";
+            }
+            else if (plaka == "Seçim YaP") {
+                hata = "Lütfen plaka seçin";
+            }
+            else if (km == "") {
+                hata = "Lütfen araç km girin";
+            }
+            else if (aracAciklama == "") {
+                hata = "Lütfen araç açıklaması girin";
+            }
+            if (hata != "") {
+                toastr.success(hata);
+            } else {
+                FaturaDüzenle();
+            }
         }
     </script>
 }

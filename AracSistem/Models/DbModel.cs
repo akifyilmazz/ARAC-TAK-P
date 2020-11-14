@@ -157,6 +157,10 @@ namespace AracSistem.Models
                 .WithRequired(e => e.Stok)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Stok_Islem>()
+                .Property(e => e.StokIslem_Tutar)
+                .HasPrecision(19, 4);
+
             modelBuilder.Entity<User>()
                 .Property(e => e.User_Mail)
                 .IsUnicode(false);

@@ -167,7 +167,9 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\InvociesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IslemTursController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
+    <Compile Include="Controllers\OdemeSeklisController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RuhsatController.cs" />
     <Compile Include="Controllers\StokController.cs" />
@@ -195,10 +197,13 @@
     <Compile Include="ViewModels\CustomerDetails.cs" />
     <Compile Include="ViewModels\FaturaCreat.cs" />
     <Compile Include="ViewModels\HomeIndex.cs" />
+    <Compile Include="ViewModels\InvcociesDetail.cs" />
     <Compile Include="ViewModels\InvociesEdit.cs" />
     <Compile Include="ViewModels\NewInvociesSales.cs" />
     <Compile Include="ViewModels\RuhsatCreat.cs" />
+    <Compile Include="ViewModels\RuhsaEdit.cs" />
     <Compile Include="ViewModels\StokCreate.cs" />
+    <Compile Include="ViewModels\StokEdit.cs" />
     <Compile Include="ViewModels\stokEklePartialView.cs" />
     <Compile Include="ViewModels\ViewResult.cs" />
   </ItemGroup>
@@ -3268,7 +3273,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -3318,6 +3325,16 @@
     <Content Include="Views\Ruhsat\Index.cshtml" />
     <Content Include="Views\Invocies\newInvoiceSales.cshtml" />
     <Content Include="Views\Invocies\stokEklePartialView.cshtml" />
+    <Content Include="Views\OdemeSeklis\Create.cshtml" />
+    <Content Include="Views\OdemeSeklis\Delete.cshtml" />
+    <Content Include="Views\OdemeSeklis\Details.cshtml" />
+    <Content Include="Views\OdemeSeklis\Edit.cshtml" />
+    <Content Include="Views\OdemeSeklis\Index.cshtml" />
+    <Content Include="Views\IslemTurs\Create.cshtml" />
+    <Content Include="Views\IslemTurs\Delete.cshtml" />
+    <Content Include="Views\IslemTurs\Details.cshtml" />
+    <Content Include="Views\IslemTurs\Edit.cshtml" />
+    <Content Include="Views\IslemTurs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
